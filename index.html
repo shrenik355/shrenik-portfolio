@@ -12,6 +12,8 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#05070D" />
+<meta name="color-scheme" content="dark" />
 <title>Shrenik Shukla -AI Engineer · Computer Vision · Machine Learning</title>
 
 <!-- ============ SEO / META ============ -->
@@ -58,56 +60,93 @@
    Depth comes from soft layered shadows, not glow.
    ============================================================ */
 :root{
-  --bg:#F8FAFC;
-  --bg-2:#EEF4FF;
-  --card:#FFFFFF;
-  --panel:rgba(255,255,255,0.72);
-  --panel-brd:#E2E8F0;
-  --txt:#0F172A;
-  --txt-dim:#475569;
-  --txt-faint:#94A3B8;
-  --primary:#2563EB;     /* blue */
-  --accent:#14B8A6;      /* teal */
-  --violet:#7C3AED;
-  --grad:linear-gradient(135deg,#2563EB,#7C3AED);
-  --grad-soft:linear-gradient(135deg,#3B82F6,#8B5CF6);
-  /* Soft layered shadows -the Apple-page depth cue */
-  --sh-sm:0 1px 2px rgba(15,23,42,.04),0 1px 3px rgba(15,23,42,.06);
-  --sh-md:0 4px 12px rgba(15,23,42,.06),0 2px 4px rgba(15,23,42,.04);
-  --sh-lg:0 18px 40px rgba(37,99,235,.10),0 8px 16px rgba(15,23,42,.05);
-  --sh-xl:0 30px 70px rgba(37,99,235,.14),0 12px 24px rgba(15,23,42,.06);
+  /* ===== AI Command Center -dark holographic HUD palette ===== */
+  --bg:#05070D;            /* deep space navy-black */
+  --bg-2:#0A1020;          /* panel base */
+  --card:#0C1322;          /* solid fallback for cards */
+  --panel:rgba(12,19,34,0.72);
+  --panel-brd:rgba(56,189,248,0.18);   /* faint cyan hairline */
+  --txt:#E8F4FF;           /* near-white, slightly cyan */
+  --txt-dim:#9FB4CE;       /* muted slate-cyan */
+  --txt-faint:#5C7392;     /* dim labels */
+  --primary:#38BDF8;       /* cyan -primary HUD accent */
+  --accent:#22D3EE;        /* bright cyan */
+  --violet:#A78BFA;        /* soft violet */
+  --grad:linear-gradient(135deg,#38BDF8,#818CF8 55%,#A78BFA);
+  --grad-soft:linear-gradient(135deg,#22D3EE,#8B5CF6);
+  /* Glowing layered shadows -the HUD depth + bloom cue */
+  --sh-sm:0 1px 2px rgba(0,0,0,.4),0 0 0 1px rgba(56,189,248,.05);
+  --sh-md:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(56,189,248,.08);
+  --sh-lg:0 20px 48px rgba(0,0,0,.55),0 0 32px rgba(56,189,248,.12);
+  --sh-xl:0 30px 70px rgba(0,0,0,.6),0 0 50px rgba(56,189,248,.16);
   --font-display:'Sora',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',monospace;
   --maxw:1180px;
   --ease:cubic-bezier(.22,.61,.36,1);
+  /* Glassmorphism -translucent dark holo panels with cyan edge-light */
+  --glass-bg:rgba(13,21,38,0.55);
+  --glass-bg-strong:rgba(13,21,38,0.78);
+  --glass-brd:rgba(56,189,248,0.22);
+  --glass-blur:16px;
+  --glow:0 0 0 1px rgba(56,189,248,.10) inset,0 1px 0 rgba(129,140,248,.12) inset;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   font-family:var(--font-display);
-  background:var(--bg);
+  background:
+    radial-gradient(120vw 90vh at 50% -10%,#0B1428 0%,transparent 60%),
+    radial-gradient(80vw 70vh at 50% 110%,#0A0F1E 0%,transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
   color:var(--txt);
   overflow-x:hidden;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
-::selection{background:rgba(37,99,235,.16);color:var(--txt)}
+::selection{background:rgba(56,189,248,.28);color:#fff}
 
-/* Ambient: soft pastel mesh gradients -light, never empty, never neon */
+/* Ambient: glowing cyan/violet mesh blooms over the dark canvas */
 .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  --par-x:0px;--par-y:0px;
   background:
-    radial-gradient(60vw 50vw at 80% -5%,rgba(124,58,237,.10),transparent 60%),
-    radial-gradient(55vw 50vw at 5% 10%,rgba(37,99,235,.10),transparent 60%),
-    radial-gradient(50vw 50vw at 60% 100%,rgba(20,184,166,.08),transparent 60%);
+    radial-gradient(60vw 50vw at 80% -5%,rgba(129,140,248,.16),transparent 60%),
+    radial-gradient(55vw 50vw at 5% 10%,rgba(56,189,248,.16),transparent 60%),
+    radial-gradient(50vw 50vw at 60% 100%,rgba(34,211,238,.10),transparent 60%);
 }
 .ambient::before,.ambient::after{
-  content:'';position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;
+  content:'';position:absolute;border-radius:50%;filter:blur(90px);opacity:.6;
 }
-.ambient::before{width:42vw;height:42vw;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);top:-8%;left:-6%;animation:drift1 26s var(--ease) infinite alternate}
-.ambient::after{width:38vw;height:38vw;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 70%);bottom:-12%;right:-6%;animation:drift2 30s var(--ease) infinite alternate}
+.ambient::before{width:42vw;height:42vw;background:radial-gradient(circle,rgba(56,189,248,.30),transparent 70%);top:-8%;left:-6%;animation:drift1 26s var(--ease) infinite alternate;will-change:transform}
+.ambient::after{width:38vw;height:38vw;background:radial-gradient(circle,rgba(167,139,250,.26),transparent 70%);bottom:-12%;right:-6%;animation:drift2 30s var(--ease) infinite alternate;will-change:transform}
 @keyframes drift1{to{transform:translate(7vw,5vh) scale(1.12)}}
 @keyframes drift2{to{transform:translate(-5vw,-7vh) scale(1.1)}}
+
+/* Glowing neural grid -fixed, parallax-reactive, fades toward edges */
+.grid-glow{position:fixed;inset:-10% -10% 0 -10%;z-index:0;pointer-events:none;
+  --par-x:0px;--par-y:0px;
+  background-image:
+    linear-gradient(rgba(56,189,248,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(129,140,248,.10) 1px,transparent 1px);
+  background-size:54px 54px;
+  transform:translate3d(var(--par-x),var(--par-y),0);
+  transition:transform .5s var(--ease);
+  -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 28%,#000 0%,transparent 80%);
+  mask-image:radial-gradient(ellipse 75% 65% at 50% 28%,#000 0%,transparent 80%);
+  will-change:transform;
+}
+
+/* HUD scanning lines -very subtle horizontal sweep + static scanline texture */
+.scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(to bottom,rgba(56,189,248,.025) 0px,rgba(56,189,248,.025) 1px,transparent 1px,transparent 3px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%);
+}
+.scanlines::after{content:'';position:absolute;left:0;right:0;height:34vh;
+  background:linear-gradient(to bottom,transparent,rgba(56,189,248,.05),transparent);
+  animation:scansweep 7.5s linear infinite;will-change:transform}
+@keyframes scansweep{0%{transform:translateY(-40vh)}100%{transform:translateY(140vh)}}
 
 /* 3D canvas behind hero */
 #bg-canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
@@ -122,53 +161,55 @@ nav{
   transition:background .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
   border-bottom:1px solid transparent;
 }
-nav.scrolled{background:rgba(255,255,255,.78);border-bottom:1px solid var(--panel-brd);box-shadow:var(--sh-sm)}
+nav.scrolled{background:rgba(7,11,20,.6);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--glass-brd);box-shadow:var(--sh-sm)}
 .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;display:flex;align-items:center;gap:10px}
-.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 2px 8px rgba(37,99,235,.4)}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 12px rgba(56,189,248,.7)}
 .nav-links{display:flex;gap:30px;font-size:.88rem;font-weight:500}
 .nav-links a{color:var(--txt-dim);text-decoration:none;transition:color .25s var(--ease);position:relative}
 .nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;border-radius:2px;background:var(--grad);transition:width .3s var(--ease)}
 .nav-links a:hover{color:var(--txt)}
 .nav-links a:hover::after{width:100%}
-.nav-mob{display:none;background:var(--card);border:1px solid var(--panel-brd);color:var(--txt);padding:8px 12px;border-radius:10px;font-family:var(--font-mono);font-size:.8rem;cursor:pointer;box-shadow:var(--sh-sm)}
+.nav-mob{display:none;background:rgba(13,21,38,.6);border:1px solid var(--glass-brd);color:var(--txt);padding:8px 12px;border-radius:10px;font-family:var(--font-mono);font-size:.8rem;cursor:pointer;box-shadow:var(--sh-sm)}
 @media(max-width:820px){.nav-links{display:none}.nav-mob{display:block}}
 
 /* ============ LAYOUT ============ */
 section{position:relative;z-index:2;padding:clamp(90px,13vh,160px) clamp(20px,5vw,56px)}
 .wrap{max-width:var(--maxw);margin:0 auto}
-.eyebrow{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600}
-.eyebrow::before{content:'';width:26px;height:2px;border-radius:2px;background:var(--grad)}
+.eyebrow{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;text-shadow:0 0 12px rgba(56,189,248,.3)}
+.eyebrow::before{content:'';width:26px;height:2px;border-radius:2px;background:var(--grad);box-shadow:0 0 8px rgba(56,189,248,.6)}
 h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035em;line-height:1.05;margin-bottom:20px;color:var(--txt)}
 .lead{color:var(--txt-dim);max-width:620px;font-size:clamp(1.02rem,1.5vw,1.12rem)}
 
-/* Card surface -white with soft layered shadow, the core depth cue */
+/* Card surface -frosted glassmorphism with soft layered depth */
 .glass{
-  background:var(--card);
-  border:1px solid var(--panel-brd);
+  background:var(--glass-bg);
+  border:1px solid var(--glass-brd);
   border-radius:20px;
-  box-shadow:var(--sh-md);
+  box-shadow:var(--sh-md),var(--glow);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(150%);
   transition:transform .5s var(--ease),box-shadow .45s var(--ease),border-color .4s var(--ease);
   position:relative;overflow:hidden;
 }
-.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(37,99,235,.04),transparent 46%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
-.glass:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:rgba(37,99,235,.22)}
+.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(56,189,248,.10),transparent 46%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
+.glass:hover{transform:translateY(-5px);box-shadow:var(--sh-lg),var(--glow);border-color:rgba(56,189,248,.45)}
 .glass:hover::before{opacity:1}
 
 /* ============ HERO ============ */
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:3}
-/* Soft light scrim keeps copy crisp over the floating crystal without going dark */
+/* Dark scrim keeps copy crisp over the glowing core */
 #hero::before{
   content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:min(960px,94vw);height:min(700px,88vh);
-  background:radial-gradient(ellipse at center,rgba(248,250,252,.86) 0%,rgba(248,250,252,.5) 46%,rgba(248,250,252,0) 78%);
+  background:radial-gradient(ellipse at center,rgba(5,7,13,.82) 0%,rgba(5,7,13,.45) 46%,rgba(5,7,13,0) 78%);
   z-index:-1;pointer-events:none;
 }
 .hero-inner{max-width:880px;position:relative}
-.hero-name{font-size:clamp(2.7rem,8.4vw,5.6rem);font-weight:800;letter-spacing:-.045em;line-height:.98;margin-bottom:10px;color:var(--txt)}
+.hero-name{font-size:clamp(2.7rem,8.4vw,5.6rem);font-weight:800;letter-spacing:-.045em;line-height:.98;margin-bottom:10px;color:var(--txt);text-shadow:0 0 32px rgba(56,189,248,.18)}
 .hero-name .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero-roles{display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center;margin:24px 0;font-family:var(--font-mono);font-size:clamp(.74rem,1.6vw,.9rem)}
-.hero-roles span{padding:8px 16px;border:1px solid var(--panel-brd);border-radius:100px;color:var(--txt-dim);background:rgba(255,255,255,.7);backdrop-filter:blur(8px);box-shadow:var(--sh-sm);transition:all .3s var(--ease)}
-.hero-roles span.lit{color:var(--primary);border-color:rgba(37,99,235,.3);background:rgba(238,244,255,.9);font-weight:600}
+.hero-roles span{padding:8px 16px;border:1px solid var(--glass-brd);border-radius:100px;color:var(--txt-dim);background:rgba(13,21,38,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--sh-sm);transition:all .3s var(--ease)}
+.hero-roles span.lit{color:var(--primary);border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.12);font-weight:600;box-shadow:0 0 18px rgba(56,189,248,.18)}
 .hero-tag{color:var(--txt-dim);font-size:clamp(1.05rem,2vw,1.28rem);max-width:600px;margin:0 auto 38px;font-weight:400;line-height:1.6}
 .hero-tag b{color:var(--txt);font-weight:600}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
@@ -177,13 +218,34 @@ h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035
   padding:14px 28px;border-radius:14px;cursor:pointer;text-decoration:none;
   display:inline-flex;align-items:center;gap:9px;transition:all .3s var(--ease);border:1px solid transparent;
 }
-.btn-primary{background:var(--grad);color:#fff;box-shadow:var(--sh-lg)}
+.btn-primary{background:var(--grad);color:#05070D;font-weight:700;box-shadow:var(--sh-lg)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--sh-xl)}
-.btn-ghost{background:var(--card);border-color:var(--panel-brd);color:var(--txt);box-shadow:var(--sh-sm)}
-.btn-ghost:hover{border-color:rgba(37,99,235,.4);background:var(--bg-2);transform:translateY(-2px);box-shadow:var(--sh-md)}
+.btn-ghost{background:rgba(13,21,38,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:var(--glass-brd);color:var(--txt);box-shadow:var(--sh-sm)}
+.btn-ghost:hover{border-color:rgba(56,189,248,.55);background:rgba(56,189,248,.10);transform:translateY(-2px);box-shadow:var(--sh-md)}
 .scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;color:var(--txt-faint);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
 .scroll-hint .line{width:1px;height:36px;background:linear-gradient(var(--primary),transparent);animation:pulse 2s var(--ease) infinite}
 @keyframes pulse{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* Holographic HUD rings around the AI core */
+.hud-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(620px,86vw);aspect-ratio:1;z-index:0;pointer-events:none;
+  display:flex;align-items:center;justify-content:center}
+.hud-ring{position:absolute;border-radius:50%;border:1px solid rgba(56,189,248,.22)}
+.hud-ring.r1{inset:0;border-style:dashed;animation:spin 38s linear infinite}
+.hud-ring.r2{inset:14%;border-color:rgba(129,140,248,.26);border-top-color:rgba(129,140,248,.6);border-bottom-color:transparent;animation:spin 22s linear infinite reverse}
+.hud-ring.r3{inset:30%;border-color:rgba(34,211,238,.22);border-left-color:rgba(34,211,238,.55);border-right-color:transparent;animation:spin 14s linear infinite}
+.hud-ticks{position:absolute;inset:6%;border-radius:50%;
+  background:
+    repeating-conic-gradient(from 0deg,rgba(56,189,248,.4) 0deg,rgba(56,189,248,.4) .5deg,transparent .5deg,transparent 15deg);
+  -webkit-mask:radial-gradient(circle,transparent 0 46%,#000 46% 49%,transparent 49%);
+  mask:radial-gradient(circle,transparent 0 46%,#000 46% 49%,transparent 49%);
+  animation:spin 60s linear infinite;opacity:.6}
+.hud-readout{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.22em;color:var(--accent);
+  text-transform:uppercase;white-space:nowrap;opacity:.8;
+  text-shadow:0 0 10px rgba(34,211,238,.5);animation:pulse 3s var(--ease) infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:820px){.hud-rings{width:min(360px,80vw);opacity:.7}}
 
 /* Reveal on scroll */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -207,8 +269,8 @@ h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035
 /* About -headshot + facts + mission layout */
 .about-top{display:grid;grid-template-columns:280px 1fr;gap:30px;margin-top:46px;align-items:stretch}
 @media(max-width:820px){.about-top{grid-template-columns:1fr}}
-.headshot{padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:300px;background:linear-gradient(160deg,#EEF4FF,#fff)}
-.headshot .ring{width:120px;height:120px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.4rem;font-weight:700;box-shadow:var(--sh-lg);margin-bottom:18px;letter-spacing:-.02em}
+.headshot{padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:300px;background:linear-gradient(160deg,rgba(56,189,248,.10),rgba(13,21,38,.4))}
+.headshot .ring{width:120px;height:120px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#05070D;font-size:2.4rem;font-weight:700;box-shadow:0 0 36px rgba(56,189,248,.45);margin-bottom:18px;letter-spacing:-.02em}
 .headshot .h-name{font-weight:700;font-size:1.1rem}
 .headshot .h-role{color:var(--primary);font-family:var(--font-mono);font-size:.8rem;margin-top:4px}
 .headshot .h-loc{color:var(--txt-faint);font-size:.8rem;margin-top:10px;display:flex;align-items:center;gap:6px}
@@ -225,8 +287,8 @@ h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035
 .tl::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;background:linear-gradient(var(--primary),var(--violet),transparent)}
 .tl-item{position:relative;padding:0 0 44px 34px}
 .tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:'';position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.1);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.tl-item.in::before{transform:scale(1.18);box-shadow:0 0 0 6px rgba(37,99,235,.14)}
+.tl-item::before{content:'';position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2.5px solid var(--primary);box-shadow:0 0 0 4px rgba(56,189,248,.12),0 0 14px rgba(56,189,248,.5);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.tl-item.in::before{transform:scale(1.18);box-shadow:0 0 0 6px rgba(56,189,248,.16),0 0 20px rgba(56,189,248,.7)}
 .tl-card{padding:26px 28px}
 .tl-role{font-size:1.18rem;font-weight:650;letter-spacing:-.01em;color:var(--txt)}
 .tl-meta{font-family:var(--font-mono);font-size:.78rem;color:var(--primary);margin:5px 0 12px;letter-spacing:.03em;font-weight:500}
@@ -236,46 +298,116 @@ h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035
 .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
 @media(max-width:820px){.proj-grid{grid-template-columns:1fr}}
 .proj{padding:0;perspective:1400px}
-.proj-card{padding:0;height:100%;transition:transform .4s var(--ease),box-shadow .45s var(--ease);transform-style:preserve-3d;overflow:hidden}
+.proj-card{padding:0;height:100%;transition:transform .4s var(--ease),box-shadow .45s var(--ease);transform-style:preserve-3d;overflow:hidden;will-change:transform}
+/* Moving glare highlight driven by cursor position (set via JS custom props) */
+.proj-card .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;opacity:0;
+  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,0%),rgba(56,189,248,.22),transparent 45%);
+  transition:opacity .4s var(--ease);mix-blend-mode:screen}
+.proj:hover .proj-card .glare{opacity:1}
+/* HUD corner brackets -frame each card like a system module */
+.proj-card::before,.proj-card::after{content:'';position:absolute;width:18px;height:18px;z-index:5;pointer-events:none;opacity:.5;transition:opacity .4s var(--ease)}
+.proj-card::before{top:10px;left:10px;border-top:1.5px solid var(--accent);border-left:1.5px solid var(--accent);border-top-left-radius:4px}
+.proj-card::after{bottom:10px;right:10px;border-bottom:1.5px solid var(--accent);border-right:1.5px solid var(--accent);border-bottom-right-radius:4px}
+.proj:hover .proj-card::before,.proj:hover .proj-card::after{opacity:1}
 .proj.feat{grid-column:1/-1}
 /* Hero illustration band atop each card */
-.proj-hero{height:170px;position:relative;overflow:hidden;border-bottom:1px solid var(--panel-brd)}
+.proj-hero{height:170px;position:relative;overflow:hidden;border-bottom:1px solid var(--glass-brd)}
 .proj.feat .proj-hero{height:230px}
 .proj-hero svg{width:100%;height:100%;display:block}
 .proj-body{padding:26px 28px}
 .proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .proj-status{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:100px;font-weight:600}
-.st-live{color:#0d9488;background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.25)}
+.st-live{color:#22D3EE;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.30);box-shadow:0 0 12px rgba(34,211,238,.15)}
 .proj h3{font-size:1.32rem;font-weight:650;letter-spacing:-.02em;margin-bottom:10px;color:var(--txt)}
 .proj.feat h3{font-size:1.7rem}
 .proj p{color:var(--txt-dim);font-size:.94rem;font-weight:400;margin-bottom:18px}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
-.chip{font-family:var(--font-mono);font-size:.72rem;padding:5px 11px;border-radius:8px;background:var(--bg-2);border:1px solid var(--panel-brd);color:var(--primary);font-weight:500}
+.chip{font-family:var(--font-mono);font-size:.72rem;padding:5px 11px;border-radius:8px;background:rgba(56,189,248,.08);border:1px solid var(--glass-brd);color:var(--accent);font-weight:500}
 .proj-actions{display:flex;gap:10px;flex-wrap:wrap}
-.proj-btn{font-family:var(--font-display);font-size:.82rem;font-weight:600;padding:9px 16px;border-radius:10px;cursor:pointer;border:1px solid var(--panel-brd);background:var(--card);color:var(--txt);display:inline-flex;align-items:center;gap:7px;transition:all .25s var(--ease);text-decoration:none}
-.proj-btn:hover{background:var(--bg-2);border-color:rgba(37,99,235,.35);transform:translateY(-1px)}
-.proj-btn.solid{background:var(--grad);color:#fff;border-color:transparent;box-shadow:var(--sh-md)}
+.proj-btn{font-family:var(--font-display);font-size:.82rem;font-weight:600;padding:9px 16px;border-radius:10px;cursor:pointer;border:1px solid var(--glass-brd);background:rgba(13,21,38,.6);color:var(--txt);display:inline-flex;align-items:center;gap:7px;transition:all .25s var(--ease);text-decoration:none}
+.proj-btn:hover{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.5);transform:translateY(-1px)}
+.proj-btn.solid{background:var(--grad);color:#05070D;border-color:transparent;box-shadow:var(--sh-md)}
 .proj-btn.solid:hover{box-shadow:var(--sh-lg)}
 .proj-detail{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
-.proj-detail-inner{padding-top:18px;margin-top:18px;border-top:1px solid var(--panel-brd)}
+.proj-detail-inner{padding-top:18px;margin-top:18px;border-top:1px solid var(--glass-brd)}
 .proj.open .proj-detail{max-height:460px}
 .arch{font-family:var(--font-mono);font-size:.82rem;color:var(--txt-dim);line-height:1.95}
 .arch b{color:var(--primary);font-weight:600}
+
+/* ---- Project filters ---- */
+.proj-filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.filter-btn{
+  font-family:var(--font-mono);font-size:.82rem;font-weight:500;
+  padding:9px 18px;border-radius:100px;cursor:pointer;
+  background:rgba(13,21,38,.6);border:1px solid var(--glass-brd);color:var(--txt-dim);
+  transition:all .3s var(--ease);box-shadow:var(--sh-sm);
+}
+.filter-btn:hover{color:var(--txt);border-color:rgba(56,189,248,.5);transform:translateY(-2px);box-shadow:var(--sh-md)}
+.filter-btn.active{color:#05070D;background:var(--grad);border-color:transparent;font-weight:600;box-shadow:var(--sh-lg)}
+
+/* ---- Category label + featured badge on cards ---- */
+.proj-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.proj-cat{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(56,189,248,.08);padding:4px 10px;border-radius:100px;border:1px solid var(--glass-brd);font-weight:600}
+.proj-feat-badge{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#05070D;background:var(--grad);padding:4px 10px;border-radius:100px;font-weight:600;box-shadow:0 0 14px rgba(56,189,248,.4)}
+
+/* Card enter animation as filters change */
+.proj.show-anim{animation:projIn .5s var(--ease) both}
+@keyframes projIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.proj.hide{display:none}
+
+/* ---- Project details modal ---- */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 20px;overflow-y:auto;
+  background:rgba(2,4,9,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s var(--ease);
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{
+  position:relative;width:min(820px,100%);margin:auto 0;
+  background:linear-gradient(180deg,rgba(13,21,38,.96),rgba(8,12,22,.98));border:1px solid var(--glass-brd);border-radius:22px;
+  box-shadow:var(--sh-xl);overflow:hidden;
+  transform:translateY(24px) scale(.98);transition:transform .4s var(--ease);
+}
+.modal-overlay.open .modal{transform:none}
+.modal-banner{height:200px;position:relative;overflow:hidden;border-bottom:1px solid var(--glass-brd)}
+.modal-banner svg{width:100%;height:100%;display:block}
+.modal-close{
+  position:absolute;top:16px;right:16px;z-index:2;width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;
+  background:rgba(13,21,38,.85);border:1px solid var(--glass-brd);color:var(--txt);
+  box-shadow:var(--sh-md);transition:all .25s var(--ease);
+}
+.modal-close:hover{background:rgba(56,189,248,.18);transform:rotate(90deg);color:var(--accent)}
+.modal-body{padding:30px clamp(24px,4vw,40px) 36px}
+.modal-head{margin-bottom:8px}
+.modal-head .proj-meta{margin-bottom:10px}
+.modal-head h3{font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--txt)}
+.modal-section{margin-top:24px}
+.modal-section h4{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);font-weight:600;margin-bottom:10px}
+.modal-section p{color:var(--txt-dim);font-size:.95rem;line-height:1.7}
+.modal-section ul{list-style:none;display:grid;gap:8px}
+.modal-section li{position:relative;padding-left:22px;color:var(--txt-dim);font-size:.92rem;line-height:1.6}
+.modal-section li::before{content:'›';position:absolute;left:4px;color:var(--primary);font-weight:700}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:640px){.modal-grid{grid-template-columns:1fr}}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid var(--panel-brd)}
+body.modal-locked{overflow:hidden}
 
 /* ============ SKILLS (neural node graph) ============ */
 .skills-shell{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;margin-top:48px;align-items:start}
 @media(max-width:820px){.skills-shell{grid-template-columns:1fr}}
 .node-wrap{position:relative}
 .node-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.node-svg line{stroke:rgba(37,99,235,.16);stroke-width:1.5}
+.node-svg line{stroke:rgba(56,189,248,.20);stroke-width:1.5}
 .node-field{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px}
 .node{
   font-family:var(--font-mono);font-size:.86rem;padding:11px 18px;border-radius:100px;
-  background:var(--card);border:1px solid var(--panel-brd);color:var(--txt-dim);
+  background:rgba(13,21,38,.6);border:1px solid var(--glass-brd);color:var(--txt-dim);
   cursor:pointer;transition:all .3s var(--ease);user-select:none;box-shadow:var(--sh-sm);
 }
-.node:hover{color:var(--txt);border-color:rgba(37,99,235,.4);transform:translateY(-2px);box-shadow:var(--sh-md)}
-.node.active{color:#fff;background:var(--grad);border-color:transparent;font-weight:600;box-shadow:var(--sh-lg)}
+.node:hover{color:var(--txt);border-color:rgba(56,189,248,.5);transform:translateY(-2px);box-shadow:var(--sh-md)}
+.node.active{color:#05070D;background:var(--grad);border-color:transparent;font-weight:600;box-shadow:0 0 22px rgba(56,189,248,.45)}
 .skill-panel{padding:30px;min-height:220px}
 .skill-panel .ph{color:var(--txt-faint);font-size:.92rem}
 .skill-panel h4{font-size:1.05rem;margin-bottom:16px;color:var(--primary);font-family:var(--font-mono);font-weight:600}
@@ -304,13 +436,13 @@ h2.title{font-size:clamp(2rem,4.8vw,3.3rem);font-weight:700;letter-spacing:-.035
 .gh-loading{color:var(--txt-faint);font-size:.9rem;text-align:center;padding:36px;grid-column:1/-1}
 .gh-note{margin-top:18px;font-family:var(--font-mono);font-size:.74rem;color:var(--txt-faint)}
 
-/* ============ CONTACT TERMINAL (light) ============ */
-.terminal{margin-top:46px;border-radius:18px;overflow:hidden;border:1px solid var(--panel-brd);background:#0F172A;box-shadow:var(--sh-xl)}
-.term-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:#1E293B;border-bottom:1px solid rgba(255,255,255,.06)}
+/* ============ CONTACT TERMINAL (AI command console) ============ */
+.terminal{margin-top:46px;border-radius:18px;overflow:hidden;border:1px solid var(--glass-brd);background:#060B16;box-shadow:var(--sh-xl),0 0 40px rgba(56,189,248,.10)}
+.term-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:#0B1424;border-bottom:1px solid rgba(56,189,248,.14)}
 .term-bar .dots{display:flex;gap:7px}
 .term-bar .dots i{width:11px;height:11px;border-radius:50%;display:block}
 .term-bar .dots i:nth-child(1){background:#ff5f57}.term-bar .dots i:nth-child(2){background:#febc2e}.term-bar .dots i:nth-child(3){background:#28c840}
-.term-bar .ttl{font-family:var(--font-mono);font-size:.78rem;color:#94A3B8;margin-left:8px}
+.term-bar .ttl{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);margin-left:8px;letter-spacing:.06em}
 .term-body{padding:28px 26px;font-family:var(--font-mono);font-size:.9rem;min-height:230px}
 .term-line{margin-bottom:6px}
 .term-prompt{color:#5eead4}
@@ -326,12 +458,205 @@ footer{position:relative;z-index:2;text-align:center;padding:54px 20px;border-to
 footer a{color:var(--txt-dim);text-decoration:none;font-weight:500}
 footer a:hover{color:var(--primary)}
 
+/* Mobile: lighten backdrop-blur for performance, guard against overflow */
+@media(max-width:820px){
+  :root{--glass-blur:12px}
+  .grid-glow{background-size:42px 42px}
+}
+html,body{max-width:100%;overflow-x:hidden}
+
 /* Accessibility: focus + reduced motion */
 a:focus-visible,button:focus-visible,.node:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:6px}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
   .reveal{opacity:1;transform:none}
+  .grid-glow{transform:none!important}
+  .proj-card .glare{display:none}
+  .scanlines::after{display:none}
+  .hud-ring,.hud-ticks{animation:none!important}
+  .asst-mic .ping{animation:none!important}
+  .asst-orb i{animation:none!important}
 }
+
+/* =====================================================================
+   AI ASSISTANT -floating mic, command console panel, status states
+   ===================================================================== */
+.asst-mic{
+  position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:180;
+  width:60px;height:60px;border-radius:50%;cursor:pointer;border:1px solid var(--glass-brd);
+  background:linear-gradient(145deg,rgba(56,189,248,.22),rgba(167,139,250,.18));
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  color:var(--accent);display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--sh-lg),0 0 26px rgba(56,189,248,.3);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.asst-mic:hover{transform:translateY(-3px) scale(1.05);border-color:rgba(56,189,248,.6);box-shadow:var(--sh-xl),0 0 36px rgba(56,189,248,.45)}
+.asst-mic svg{width:24px;height:24px;display:block}
+.asst-mic .ping{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(56,189,248,.5);opacity:0;pointer-events:none}
+.asst-mic.listening{border-color:rgba(34,211,238,.8);color:#22D3EE}
+.asst-mic.listening .ping{animation:asstPing 1.6s var(--ease) infinite}
+@keyframes asstPing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.8);opacity:0}}
+
+/* Console panel */
+.asst-panel{
+  position:fixed;right:clamp(16px,3vw,28px);bottom:calc(clamp(16px,3vw,28px) + 74px);z-index:181;
+  width:min(360px,calc(100vw - 32px));
+  max-height:min(560px,calc(100vh - 110px));
+  display:flex;flex-direction:column;
+  background:linear-gradient(180deg,rgba(13,21,38,.92),rgba(8,12,22,.96));
+  border:1px solid var(--glass-brd);border-radius:18px;
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:var(--sh-xl),0 0 40px rgba(56,189,248,.12);
+  overflow:hidden;transform-origin:bottom right;
+  opacity:0;visibility:hidden;transform:translateY(12px) scale(.96);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s var(--ease);
+}
+.asst-panel.open{opacity:1;visibility:visible;transform:none}
+/* header + input stay pinned; the middle region scrolls */
+.asst-head{flex:0 0 auto}
+.asst-scroll{flex:1 1 auto;overflow-y:auto;min-height:0;scrollbar-width:thin}
+.asst-scroll::-webkit-scrollbar{width:6px}
+.asst-scroll::-webkit-scrollbar-thumb{background:rgba(56,189,248,.25);border-radius:6px}
+.asst-foot{flex:0 0 auto;border-top:1px solid rgba(56,189,248,.12)}
+.asst-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(56,189,248,.14);background:rgba(11,20,36,.6)}
+.asst-orb{position:relative;width:22px;height:22px;flex:0 0 auto}
+.asst-orb i{position:absolute;inset:0;border-radius:50%;background:var(--grad);box-shadow:0 0 14px rgba(56,189,248,.6);animation:asstBreath 2.6s var(--ease) infinite}
+@keyframes asstBreath{0%,100%{transform:scale(.8);opacity:.7}50%{transform:scale(1);opacity:1}}
+.asst-head .ttl{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;color:var(--txt);font-weight:600}
+.asst-head .ttl small{display:block;color:var(--txt-faint);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+.asst-close{margin-left:auto;background:none;border:none;color:var(--txt-faint);font-size:1rem;cursor:pointer;padding:4px;line-height:1;transition:color .2s var(--ease)}
+.asst-close:hover{color:var(--accent)}
+
+/* Status row + transcript */
+.asst-status{display:flex;align-items:center;gap:9px;padding:12px 16px;font-family:var(--font-mono);font-size:.76rem;color:var(--txt-dim);min-height:42px}
+.asst-status .led{width:9px;height:9px;border-radius:50%;background:var(--txt-faint);flex:0 0 auto;transition:background .3s var(--ease),box-shadow .3s var(--ease)}
+.asst-status[data-state="idle"] .led{background:#5C7392}
+.asst-status[data-state="listening"] .led{background:#22D3EE;box-shadow:0 0 10px #22D3EE;animation:asstBlink 1s step-end infinite}
+.asst-status[data-state="processing"] .led{background:#A78BFA;box-shadow:0 0 10px #A78BFA;animation:asstBlink .5s step-end infinite}
+.asst-status[data-state="done"] .led{background:#34d399;box-shadow:0 0 10px #34d399}
+.asst-status[data-state="error"] .led{background:#fb7185;box-shadow:0 0 10px #fb7185}
+@keyframes asstBlink{50%{opacity:.25}}
+.asst-transcript{padding:0 16px 12px;font-family:var(--font-mono);font-size:.74rem;color:var(--accent);min-height:18px;word-break:break-word}
+.asst-transcript:empty{display:none}
+
+/* Text input fallback */
+.asst-inputrow{display:flex;gap:8px;padding:0 16px 14px}
+.asst-input{flex:1;min-width:0;font-family:var(--font-mono);font-size:.8rem;color:var(--txt);
+  background:rgba(5,7,13,.6);border:1px solid var(--glass-brd);border-radius:10px;padding:9px 12px;outline:none;transition:border-color .2s var(--ease)}
+.asst-input::placeholder{color:var(--txt-faint)}
+.asst-input:focus{border-color:rgba(56,189,248,.6)}
+.asst-send{flex:0 0 auto;font-family:var(--font-display);font-weight:600;font-size:.78rem;color:#05070D;
+  background:var(--grad);border:none;border-radius:10px;padding:9px 14px;cursor:pointer;transition:box-shadow .2s var(--ease)}
+.asst-send:hover{box-shadow:0 0 16px rgba(56,189,248,.5)}
+
+/* Suggestions */
+.asst-suggest{padding:4px 16px 16px}
+.asst-suggest .lbl{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-faint);margin-bottom:9px}
+.asst-chips{display:flex;flex-wrap:wrap;gap:7px}
+.asst-chip{font-family:var(--font-mono);font-size:.72rem;color:var(--txt-dim);cursor:pointer;
+  background:rgba(56,189,248,.07);border:1px solid var(--glass-brd);border-radius:100px;padding:6px 12px;
+  transition:all .25s var(--ease)}
+.asst-chip:hover{color:var(--txt);border-color:rgba(56,189,248,.55);background:rgba(56,189,248,.14);transform:translateY(-1px)}
+
+/* Privacy note */
+.asst-priv{padding:10px 16px 14px;border-top:1px solid rgba(56,189,248,.1);font-size:.66rem;color:var(--txt-faint);line-height:1.5;display:flex;gap:7px;align-items:flex-start}
+.asst-priv svg{width:13px;height:13px;flex:0 0 auto;margin-top:1px;opacity:.8}
+
+@media(max-width:520px){
+  .asst-panel{left:16px;right:16px;width:auto;max-height:calc(100vh - 100px)}
+}
+
+/* =====================================================================
+   AI BOOT SEQUENCE -full-screen initialization overlay
+   ===================================================================== */
+.boot{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(80vw 60vh at 50% 40%,#0A1428 0%,#05070D 70%);
+  transition:opacity .6s var(--ease),visibility .6s var(--ease);
+  animation:bootFailsafe .1s linear 8s forwards}
+.boot.done{opacity:0;visibility:hidden;pointer-events:none;animation:none}
+/* Failsafe: if JS never dismisses it, fade out after 8s so content is reachable */
+@keyframes bootFailsafe{to{opacity:0;visibility:hidden;pointer-events:none}}
+.boot-inner{width:min(560px,92vw);font-family:var(--font-mono)}
+.boot-title{font-family:var(--font-display);font-weight:700;letter-spacing:.04em;font-size:clamp(1.1rem,3.4vw,1.5rem);
+  color:var(--txt);margin-bottom:6px;text-shadow:0 0 24px rgba(56,189,248,.3)}
+.boot-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.boot-sub{color:var(--txt-faint);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:26px}
+.boot-orb{position:relative;width:74px;height:74px;margin:0 auto 24px}
+.boot-orb span{position:absolute;border-radius:50%}
+.boot-orb .o-core{inset:28%;background:var(--grad);box-shadow:0 0 26px rgba(56,189,248,.7);animation:asstBreath 1.8s var(--ease) infinite}
+.boot-orb .o-r1{inset:0;border:1px solid rgba(56,189,248,.4);border-top-color:transparent;animation:spin 2.4s linear infinite}
+.boot-orb .o-r2{inset:14%;border:1px solid rgba(167,139,250,.4);border-bottom-color:transparent;animation:spin 1.6s linear infinite reverse}
+.boot-lines{display:flex;flex-direction:column;gap:11px;margin-bottom:24px;min-height:188px}
+.boot-line{opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.boot-line.in{opacity:1;transform:none}
+.boot-line .lab{display:flex;justify-content:space-between;font-size:.78rem;color:var(--txt-dim);margin-bottom:5px}
+.boot-line .lab .val{color:var(--accent)}
+.boot-bar{height:6px;border-radius:6px;background:rgba(56,189,248,.12);overflow:hidden}
+.boot-bar i{display:block;height:100%;width:0;border-radius:6px;background:var(--grad);box-shadow:0 0 12px rgba(56,189,248,.5);transition:width .5s var(--ease)}
+.boot-ready{text-align:center;font-family:var(--font-display);font-weight:600;color:var(--accent);
+  font-size:1rem;letter-spacing:.04em;opacity:0;transition:opacity .4s var(--ease);text-shadow:0 0 18px rgba(34,211,238,.5)}
+.boot-ready.in{opacity:1}
+.boot-skip{position:absolute;bottom:26px;right:26px;font-family:var(--font-mono);font-size:.72rem;
+  color:var(--txt-faint);background:rgba(13,21,38,.6);border:1px solid var(--glass-brd);border-radius:100px;
+  padding:8px 16px;cursor:pointer;transition:all .25s var(--ease)}
+.boot-skip:hover{color:var(--txt);border-color:rgba(56,189,248,.55)}
+
+/* =====================================================================
+   ASSISTANT CONVERSATION LOG + WELCOME + STATUS WIDGET
+   ===================================================================== */
+.asst-log{padding:14px 16px 4px;max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.asst-log:empty{display:none}
+.asst-log::-webkit-scrollbar{width:6px}
+.asst-log::-webkit-scrollbar-thumb{background:rgba(56,189,248,.25);border-radius:6px}
+.asst-msg{font-size:.82rem;line-height:1.55;border-radius:12px;padding:10px 13px;max-width:92%;word-break:break-word;white-space:pre-wrap}
+.asst-msg.ai{align-self:flex-start;background:rgba(56,189,248,.08);border:1px solid var(--glass-brd);color:var(--txt)}
+.asst-msg.user{align-self:flex-end;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);color:var(--txt);font-family:var(--font-mono);font-size:.78rem}
+.asst-msg .cwait{display:inline-block;width:7px;height:13px;background:var(--accent);vertical-align:middle;margin-left:2px;animation:asstBlink 1s step-end infinite}
+.asst-quick{display:flex;flex-wrap:wrap;gap:7px;padding:6px 16px 12px}
+.asst-quick button{font-family:var(--font-display);font-size:.74rem;font-weight:600;cursor:pointer;
+  color:var(--txt);background:rgba(56,189,248,.10);border:1px solid var(--glass-brd);border-radius:10px;
+  padding:8px 13px;transition:all .25s var(--ease)}
+.asst-quick button:hover{border-color:rgba(56,189,248,.55);background:rgba(56,189,248,.18);transform:translateY(-1px)}
+
+/* Live AI status widget (inside panel, collapsible header row) */
+.asst-sys{padding:6px 16px 14px;border-top:1px solid rgba(56,189,248,.1)}
+.asst-sys .lbl{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-faint);margin-bottom:8px}
+.asst-sys-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px}
+.asst-sys-item{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.68rem;color:var(--txt-dim)}
+.asst-sys-item i{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex:0 0 auto;animation:asstBlink 2.4s step-end infinite}
+
+/* =====================================================================
+   COMMAND GUIDE MODAL
+   ===================================================================== */
+.cmdg-overlay{position:fixed;inset:0;z-index:210;display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 20px;overflow-y:auto;background:rgba(2,4,9,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s var(--ease)}
+.cmdg-overlay.open{opacity:1;visibility:visible}
+.cmdg{position:relative;width:min(760px,100%);margin:auto 0;
+  background:linear-gradient(180deg,rgba(13,21,38,.96),rgba(8,12,22,.98));border:1px solid var(--glass-brd);
+  border-radius:22px;box-shadow:var(--sh-xl),0 0 40px rgba(56,189,248,.12);overflow:hidden;
+  transform:translateY(24px) scale(.98);transition:transform .4s var(--ease)}
+.cmdg-overlay.open .cmdg{transform:none}
+.cmdg-head{display:flex;align-items:center;gap:12px;padding:22px clamp(20px,4vw,30px);border-bottom:1px solid rgba(56,189,248,.14)}
+.cmdg-head .asst-orb{width:26px;height:26px}
+.cmdg-head h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;color:var(--txt)}
+.cmdg-head h3 small{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-faint);font-weight:500;margin-top:3px}
+.cmdg-close{margin-left:auto;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;background:rgba(13,21,38,.85);border:1px solid var(--glass-brd);color:var(--txt);transition:all .25s var(--ease)}
+.cmdg-close:hover{background:rgba(56,189,248,.18);transform:rotate(90deg);color:var(--accent)}
+.cmdg-body{padding:8px clamp(20px,4vw,30px) 30px;max-height:70vh;overflow-y:auto}
+.cmdg-cat{margin-top:24px}
+.cmdg-cat h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cmdg-cat h4::before{content:'';width:18px;height:2px;border-radius:2px;background:var(--grad);box-shadow:0 0 8px rgba(56,189,248,.6)}
+.cmdg-row{display:grid;grid-template-columns:180px 1fr;gap:6px 18px;padding:12px 0;border-top:1px solid rgba(56,189,248,.08)}
+@media(max-width:560px){.cmdg-row{grid-template-columns:1fr}}
+.cmdg-cmd{font-family:var(--font-mono);font-size:.84rem;color:var(--primary);font-weight:600}
+.cmdg-desc{color:var(--txt-dim);font-size:.88rem;line-height:1.55}
+.cmdg-eg{display:block;font-family:var(--font-mono);font-size:.72rem;color:var(--txt-faint);margin-top:4px}
+.cmdg-eg::before{content:'e.g. ';opacity:.7}
+.cmdg-priv{margin-top:26px;padding-top:16px;border-top:1px solid rgba(56,189,248,.12);font-size:.7rem;color:var(--txt-faint);line-height:1.6;display:flex;gap:8px;align-items:flex-start}
+.cmdg-priv svg{width:14px;height:14px;flex:0 0 auto;margin-top:2px;opacity:.8}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -340,10 +665,25 @@ a:focus-visible,button:focus-visible,.node:focus-visible{outline:2px solid var(-
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xd6x9rsdj0");
 </script>
+<noscript><style>.boot{display:none!important}</style></noscript>
 </head>
 <body>
 
+<!-- ============ AI BOOT SEQUENCE ============ -->
+<div class="boot" id="boot" role="dialog" aria-label="Portfolio initializing">
+  <div class="boot-inner">
+    <div class="boot-orb" aria-hidden="true"><span class="o-r1"></span><span class="o-r2"></span><span class="o-core"></span></div>
+    <div class="boot-title">Initializing <span class="grad">AI Portfolio</span></div>
+    <div class="boot-sub">Shrenik Shukla · AI Engineer</div>
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-ready" id="bootReady">Portfolio Ready.</div>
+  </div>
+  <button class="boot-skip" id="bootSkip">Skip ↵</button>
+</div>
+
 <div class="ambient" aria-hidden="true"></div>
+<div class="grid-glow" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
 <!-- ============ NAV ============ -->
@@ -362,6 +702,14 @@ a:focus-visible,button:focus-visible,.node:focus-visible{outline:2px solid var(-
 
 <!-- ============ HERO ============ -->
 <section id="hero">
+  <!-- Holographic HUD rings framing the central AI core (decorative) -->
+  <div class="hud-rings" aria-hidden="true">
+    <span class="hud-ring r1"></span>
+    <span class="hud-ring r2"></span>
+    <span class="hud-ring r3"></span>
+    <span class="hud-ticks"></span>
+    <span class="hud-readout">◈ AI CORE · ONLINE</span>
+  </div>
   <div class="hero-inner">
     <div class="eyebrow" style="justify-content:center">AI Engineering Portfolio</div>
     <h1 class="hero-name">Shrenik <span class="grad">Shukla</span></h1>
@@ -471,124 +819,24 @@ a:focus-visible,button:focus-visible,.node:focus-visible{outline:2px solid var(-
   <div class="wrap reveal">
     <div class="eyebrow">03 -Projects</div>
     <h2 class="title">Independent work.</h2>
-    <p class="lead">Public and personal projects in computer vision, machine learning, and data science. Open the architecture on any card to see how it's built.</p>
+    <p class="lead">Public and personal projects in AI/ML, data analytics, databases, and forecasting. Open any card to see the full case study -problem, methodology, and results.</p>
 
-    <div class="proj-grid" id="projGrid">
-      <!-- FEATURED: AI Asset Recognition (independent project) -->
-      <div class="proj feat" data-skill="Computer Vision,OCR,Python,Machine Learning">
-        <div class="glass proj-card">
-          <div class="proj-hero">
-            <svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Computer vision recognition illustration">
-              <defs>
-                <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF4FF"/><stop offset="1" stop-color="#F8FAFC"/></linearGradient>
-                <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient>
-              </defs>
-              <rect width="800" height="230" fill="url(#gv)"/>
-              <g opacity=".5" stroke="#CBD5E1" stroke-width="1"><path d="M0 60h800M0 115h800M0 170h800M160 0v230M320 0v230M480 0v230M640 0v230"/></g>
-              <rect x="300" y="70" width="200" height="90" rx="10" fill="none" stroke="url(#gb)" stroke-width="3"/>
-              <circle cx="300" cy="70" r="6" fill="#2563EB"/><circle cx="500" cy="70" r="6" fill="#7C3AED"/>
-              <circle cx="300" cy="160" r="6" fill="#7C3AED"/><circle cx="500" cy="160" r="6" fill="#2563EB"/>
-              <text x="312" y="58" font-family="JetBrains Mono,monospace" font-size="13" fill="#2563EB" font-weight="600">asset · 0.98</text>
-              <g fill="#14B8A6"><circle cx="360" cy="115" r="4"/><circle cx="400" cy="100" r="4"/><circle cx="440" cy="125" r="4"/></g>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="proj-top">
-              <h3>AI Asset Recognition Platform</h3>
-              <span class="proj-status st-live">● Active</span>
-            </div>
-            <p>A computer-vision platform that recognizes and classifies assets from images -combining detection, OCR, and confidence scoring to extract and validate structured information from visual inputs.</p>
-            <div class="chips"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">OCR</span><span class="chip">Computer Vision</span><span class="chip">Machine Learning</span></div>
-            <div class="proj-actions">
-              <a class="proj-btn solid" href="https://github.com/shrenik355/AI-Asset-Recognition-Portfolio" target="_blank" rel="noopener">◆ GitHub</a>
-              <button class="proj-btn" data-arch>⌥ Architecture</button>
-            </div>
-            <div class="proj-detail"><div class="proj-detail-inner">
-              <div class="arch">
-                <b>›</b> image capture → quality validation → preprocessing<br>
-                <b>›</b> recognition model → asset class &amp; detection<br>
-                <b>›</b> OCR layer → text &amp; field extraction<br>
-                <b>›</b> confidence scoring → validated structured output
-              </div>
-            </div></div>
-          </div>
-        </div>
-      </div>
+    <!-- Filters (populated from project data) -->
+    <div class="proj-filters" id="projFilters" role="tablist" aria-label="Filter projects by category"></div>
 
-      <!-- AutoGuard ML -->
-      <div class="proj" data-skill="Python,Machine Learning,Data Science">
-        <div class="glass proj-card">
-          <div class="proj-hero">
-            <svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Machine learning recommendation illustration">
-              <defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF4FF"/><stop offset="1" stop-color="#F8FAFC"/></linearGradient></defs>
-              <rect width="400" height="170" fill="url(#gm)"/>
-              <g transform="translate(200 85)">
-                <circle r="30" fill="none" stroke="#2563EB" stroke-width="2.5"/>
-                <g stroke="#CBD5E1" stroke-width="1.5">
-                  <line x1="0" y1="0" x2="-110" y2="-50"/><line x1="0" y1="0" x2="110" y2="-50"/>
-                  <line x1="0" y1="0" x2="-120" y2="40"/><line x1="0" y1="0" x2="120" y2="40"/><line x1="0" y1="0" x2="0" y2="65"/>
-                </g>
-                <circle cx="-110" cy="-50" r="10" fill="#7C3AED"/><circle cx="110" cy="-50" r="10" fill="#14B8A6"/>
-                <circle cx="-120" cy="40" r="10" fill="#14B8A6"/><circle cx="120" cy="40" r="10" fill="#7C3AED"/><circle cx="0" cy="65" r="10" fill="#2563EB"/>
-                <text x="0" y="5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#fff" font-weight="600">ML</text>
-              </g>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="proj-top"><h3>AutoGuard ML</h3><span class="proj-status st-live">● Complete</span></div>
-            <p>A personalized vehicle recommendation engine across 49,846+ vehicles using multi-criteria decision-making and content-based filtering, integrating 4 government APIs.</p>
-            <div class="chips"><span class="chip">Python</span><span class="chip">Random Forest</span><span class="chip">MCDM</span><span class="chip">REST APIs</span></div>
-            <div class="proj-actions">
-              <a class="proj-btn solid" href="https://github.com/shrenik355" target="_blank" rel="noopener">◆ GitHub</a>
-              <button class="proj-btn" data-arch>⌥ Architecture</button>
-            </div>
-            <div class="proj-detail"><div class="proj-detail-inner"><div class="arch">
-              <b>›</b> 84 raw attributes → 25 features (SelectKBest)<br>
-              <b>›</b> classification (Logistic Regression, Random Forest) → 99.4% accuracy / 21,188 records<br>
-              <b>›</b> prescriptive TCO insights → 4 buyer personas
-            </div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Airbnb analysis -->
-      <div class="proj" data-skill="Python,Machine Learning,Data Science,SQL">
-        <div class="glass proj-card">
-          <div class="proj-hero">
-            <svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data analytics illustration">
-              <defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF4FF"/><stop offset="1" stop-color="#F8FAFC"/></linearGradient>
-              <linearGradient id="gbar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
-              <rect width="400" height="170" fill="url(#ga)"/>
-              <g transform="translate(70 130)">
-                <rect x="0" y="-40" width="34" height="40" rx="4" fill="url(#gbar)"/>
-                <rect x="50" y="-70" width="34" height="70" rx="4" fill="url(#gbar)"/>
-                <rect x="100" y="-55" width="34" height="55" rx="4" fill="url(#gbar)"/>
-                <rect x="150" y="-95" width="34" height="95" rx="4" fill="url(#gbar)"/>
-                <rect x="200" y="-78" width="34" height="78" rx="4" fill="url(#gbar)"/>
-                <polyline points="17,-50 67,-80 117,-65 167,-105 217,-88" fill="none" stroke="#14B8A6" stroke-width="3" stroke-linecap="round"/>
-                <g fill="#14B8A6"><circle cx="17" cy="-50" r="4"/><circle cx="67" cy="-80" r="4"/><circle cx="117" cy="-65" r="4"/><circle cx="167" cy="-105" r="4"/><circle cx="217" cy="-88" r="4"/></g>
-              </g>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="proj-top"><h3>Airbnb Market Analysis</h3><span class="proj-status st-live">● Complete</span></div>
-            <p>Market analysis across 5 countries plus a price-prediction model for 117,800 listings -identifying Denmark as the premium market.</p>
-            <div class="chips"><span class="chip">Python</span><span class="chip">Regression</span><span class="chip">Feature Engineering</span></div>
-            <div class="proj-actions">
-              <a class="proj-btn solid" href="https://github.com/shrenik355" target="_blank" rel="noopener">◆ GitHub</a>
-              <button class="proj-btn" data-arch>⌥ Architecture</button>
-            </div>
-            <div class="proj-detail"><div class="proj-detail-inner"><div class="arch">
-              <b>›</b> 83 attributes → 114 engineered features<br>
-              <b>›</b> 5 regression models compared → Random Forest best<br>
-              <b>›</b> 0.9643 R² · 41.45 RMSE
-            </div></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Cards render here from the PROJECT_DATA structure -->
+    <div class="proj-grid" id="projGrid"></div>
   </div>
 </section>
+
+<!-- ============ PROJECT DETAILS MODAL ============ -->
+<div class="modal-overlay" id="projModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close project details">✕</button>
+    <div class="modal-banner" id="modalBanner"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
 <!-- ============ SKILLS ============ -->
 <section id="skills">
@@ -657,6 +905,75 @@ a:focus-visible,button:focus-visible,.node:focus-visible{outline:2px solid var(-
   <p style="margin-top:8px"><a href="#hero">Back to top ↑</a></p>
 </footer>
 
+<!-- ============ AI ASSISTANT (voice + text command layer) ============ -->
+<button class="asst-mic" id="asstMic" aria-label="Open voice assistant" aria-expanded="false" title="Voice assistant">
+  <span class="ping" aria-hidden="true"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+    <path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/>
+  </svg>
+</button>
+
+<section class="asst-panel" id="asstPanel" role="dialog" aria-label="AI assistant command console" aria-hidden="true">
+  <div class="asst-head">
+    <span class="asst-orb" aria-hidden="true"><i></i></span>
+    <span class="ttl">A.R.I.A.<small>Assistant · Realtime Interface</small></span>
+    <button class="asst-close" id="asstClose" aria-label="Close assistant">✕</button>
+  </div>
+
+  <div class="asst-scroll">
+    <div class="asst-status" id="asstStatus" data-state="idle" role="status" aria-live="polite">
+      <span class="led" aria-hidden="true"></span>
+      <span id="asstStatusText">Standby — tap a command or the mic.</span>
+    </div>
+
+    <!-- Conversation log: assistant + user messages with typewriter responses -->
+    <div class="asst-log" id="asstLog" aria-live="polite"></div>
+
+    <!-- Quick action buttons (shown with the welcome message) -->
+    <div class="asst-quick" id="asstQuick"></div>
+
+    <!-- Interim voice transcript -->
+    <div class="asst-transcript" id="asstTranscript" aria-live="polite"></div>
+
+    <div class="asst-suggest">
+      <div class="lbl">Try saying / typing</div>
+      <div class="asst-chips" id="asstChips"></div>
+    </div>
+
+    <!-- Live AI status widget -->
+    <div class="asst-sys">
+      <div class="lbl">System status</div>
+      <div class="asst-sys-grid" id="asstSys"></div>
+    </div>
+
+    <div class="asst-priv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Voice commands run locally in your browser. No audio is stored or transmitted.</span>
+    </div>
+  </div>
+
+  <div class="asst-foot">
+    <div class="asst-inputrow">
+      <input class="asst-input" id="asstInput" type="text" autocomplete="off"
+             placeholder="Type a request…" aria-label="Type a request" />
+      <button class="asst-send" id="asstSend">Run</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMMAND GUIDE MODAL ============ -->
+<div class="cmdg-overlay" id="cmdgOverlay" role="dialog" aria-modal="true" aria-labelledby="cmdgTitle">
+  <div class="cmdg">
+    <div class="cmdg-head">
+      <span class="asst-orb" aria-hidden="true"><i></i></span>
+      <h3 id="cmdgTitle">Command Guide<small>Voice &amp; text · speak or type</small></h3>
+      <button class="cmdg-close" id="cmdgClose" aria-label="Close command guide">✕</button>
+    </div>
+    <div class="cmdg-body" id="cmdgBody"></div>
+  </div>
+</div>
+
 <!-- ============ THREE.JS (AI CORE) ============ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -678,6 +995,72 @@ const CONFIG = {
 document.querySelectorAll('[data-resume]').forEach(a=>a.href=CONFIG.resumeUrl);
 
 /* =====================================================================
+   AI BOOT SEQUENCE -session-gated init animation (~2.5s), skippable
+   ===================================================================== */
+(function(){
+  const boot = document.getElementById('boot');
+  if(!boot) return;
+  const linesWrap = document.getElementById('bootLines');
+  const readyEl = document.getElementById('bootReady');
+  const skip = document.getElementById('bootSkip');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Only once per browser session
+  let shown=false;
+  try{ shown = sessionStorage.getItem('aria_boot')==='1'; }catch(_){}
+
+  function finish(){
+    boot.classList.add('done');
+    try{ sessionStorage.setItem('aria_boot','1'); }catch(_){}
+    setTimeout(()=>{ boot.remove(); }, 700);
+    window.removeEventListener('keydown', onKey);
+  }
+  function onKey(e){ if(e.key==='Enter'||e.key==='Escape'){ finish(); } }
+
+  if(shown || reduce){
+    // Skip animation entirely but keep accessibility: just remove overlay.
+    boot.classList.add('done'); setTimeout(()=>boot.remove(), reduce?300:0);
+    return;
+  }
+
+  const steps = [
+    {label:'Loading Neural Engine',   val:'100%'},
+    {label:'Loading Experience',      val:'100%'},
+    {label:'Loading Projects',        val:'100%'},
+    {label:'Loading Skills',          val:'100%'},
+    {label:'Connecting GitHub',       val:'Connected'}
+  ];
+  // Build rows
+  const rows = steps.map(s=>{
+    const row=document.createElement('div'); row.className='boot-line';
+    row.innerHTML=`<div class="lab"><span>${s.label}…</span><span class="val">0%</span></div><div class="boot-bar"><i></i></div>`;
+    linesWrap.appendChild(row); return row;
+  });
+
+  skip.addEventListener('click', finish);
+  window.addEventListener('keydown', onKey);
+
+  // Animate each step in sequence
+  let i=0;
+  function runStep(){
+    if(i>=rows.length){ readyEl.classList.add('in'); setTimeout(finish, 650); return; }
+    const row=rows[i], s=steps[i];
+    const val=row.querySelector('.val'), bar=row.querySelector('.boot-bar i');
+    row.classList.add('in');
+    // fill bar
+    requestAnimationFrame(()=>{ bar.style.width='100%'; });
+    // count up the % (or show "Connected")
+    if(s.val==='100%'){
+      let p=0; const t=setInterval(()=>{ p+=Math.ceil(Math.random()*22); if(p>=100){p=100;clearInterval(t);} val.textContent=p+'%'; }, 60);
+    } else {
+      setTimeout(()=>{ val.textContent=s.val; val.style.color='#34d399'; }, 380);
+    }
+    i++; setTimeout(runStep, 440);
+  }
+  setTimeout(runStep, 260);
+})();
+
+/* =====================================================================
    3D AI CORE -wireframe icosahedron + orbiting tech labels + particles
    ===================================================================== */
 (function(){
@@ -693,30 +1076,38 @@ document.querySelectorAll('[data-resume]').forEach(a=>a.href=CONFIG.resumeUrl);
   const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, .1, 100);
   camera.position.z = 12;
 
-  // lighting -bright, soft, like a product render
-  scene.add(new THREE.AmbientLight(0xffffff, 1.4));
-  const l1 = new THREE.PointLight(0x2563eb, 1.6, 60); l1.position.set(8,6,10); scene.add(l1);
-  const l2 = new THREE.PointLight(0x7c3aed, 1.4, 60); l2.position.set(-8,-4,8); scene.add(l2);
-  const l3 = new THREE.PointLight(0x14b8a6, 1.0, 60); l3.position.set(0,8,6); scene.add(l3);
+  // lighting -cool HUD product render
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  const l1 = new THREE.PointLight(0x38bdf8, 2.0, 60); l1.position.set(8,6,10); scene.add(l1);
+  const l2 = new THREE.PointLight(0xa78bfa, 1.6, 60); l2.position.set(-8,-4,8); scene.add(l2);
+  const l3 = new THREE.PointLight(0x22d3ee, 1.4, 60); l3.position.set(0,8,6); scene.add(l3);
 
-  // AI crystal -elegant light neural object
+  // AI crystal -holographic neural object
   const core = new THREE.Group();
   const g1 = new THREE.IcosahedronGeometry(2.6, 1);
-  // soft blue wireframe shell
-  const core1 = new THREE.Mesh(g1, new THREE.MeshBasicMaterial({color:0x2563eb, wireframe:true, transparent:true, opacity:.22}));
+  // cyan wireframe shell
+  const core1 = new THREE.Mesh(g1, new THREE.MeshBasicMaterial({color:0x38bdf8, wireframe:true, transparent:true, opacity:.35}));
   // inner violet frame
-  const core2 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.9,0), new THREE.MeshBasicMaterial({color:0x7c3aed, wireframe:true, transparent:true, opacity:.28}));
-  // luminous frosted-glass center crystal
+  const core2 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.9,0), new THREE.MeshBasicMaterial({color:0xa78bfa, wireframe:true, transparent:true, opacity:.42}));
+  // luminous holographic center crystal
   const coreSolid = new THREE.Mesh(
     new THREE.IcosahedronGeometry(1.15,0),
-    new THREE.MeshStandardMaterial({color:0xdce8ff, emissive:0x9bb8ff, emissiveIntensity:.35, metalness:.2, roughness:.15, transparent:true, opacity:.55})
+    new THREE.MeshStandardMaterial({color:0x9fe8ff, emissive:0x22d3ee, emissiveIntensity:.6, metalness:.3, roughness:.15, transparent:true, opacity:.6})
   );
   core.add(core1, core2, coreSolid);
   scene.add(core);
 
-  // glowing node points on the outer shell (teal/blue accents)
-  const nodeGeo = new THREE.SphereGeometry(.055, 10, 10);
-  const nodeMat = new THREE.MeshBasicMaterial({color:0x14b8a6});
+  // Orbital accent rings -thin glowing torus loops on offset axes
+  const ringMat1 = new THREE.MeshBasicMaterial({color:0x38bdf8, transparent:true, opacity:.55});
+  const ringMat2 = new THREE.MeshBasicMaterial({color:0xa78bfa, transparent:true, opacity:.45});
+  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(3.4,.018,12,90), ringMat1);
+  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(3.9,.016,12,90), ringMat2);
+  ring1.rotation.x = Math.PI*0.5; ring2.rotation.x = Math.PI*0.32; ring2.rotation.y = Math.PI*0.2;
+  core.add(ring1, ring2);
+
+  // glowing node points on the outer shell (bright cyan accents)
+  const nodeGeo = new THREE.SphereGeometry(.06, 10, 10);
+  const nodeMat = new THREE.MeshBasicMaterial({color:0x22d3ee});
   const pos = g1.attributes.position;
   const seen = new Set();
   for(let i=0;i<pos.count;i++){
@@ -726,13 +1117,13 @@ document.querySelectorAll('[data-resume]').forEach(a=>a.href=CONFIG.resumeUrl);
     const n=new THREE.Mesh(nodeGeo,nodeMat); n.position.set(x,y,z); core.add(n);
   }
 
-  // soft particle field -light blue, low opacity, ambient
-  const pCount = reduce ? 120 : 360;
+  // soft particle field -cyan data motes drifting in the void
+  const pCount = reduce ? 120 : 420;
   const pGeo = new THREE.BufferGeometry();
   const pArr = new Float32Array(pCount*3);
   for(let i=0;i<pCount*3;i++) pArr[i]=(Math.random()-.5)*46;
   pGeo.setAttribute('position', new THREE.BufferAttribute(pArr,3));
-  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({color:0x93b4f5, size:.045, transparent:true, opacity:.45}));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({color:0x7fd8ff, size:.05, transparent:true, opacity:.6}));
   scene.add(particles);
 
   // mouse parallax
@@ -760,6 +1151,11 @@ document.querySelectorAll('[data-resume]').forEach(a=>a.href=CONFIG.resumeUrl);
     core2.rotation.z = t*0.2;
     coreSolid.rotation.y = t*0.3;
     particles.rotation.y = t*0.02;
+    // orbital rings counter-rotate on their own axes
+    ring1.rotation.z = t*0.5;
+    ring2.rotation.z = -t*0.35;
+    // gentle "breathing" pulse on the luminous center
+    coreSolid.material.emissiveIntensity = 0.3 + Math.sin(t*1.4)*0.12;
 
     // Resting position frames the text instead of covering it.
     const baseX = isNarrow() ? 0   : 4.6;
@@ -797,41 +1193,369 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>40); },{passive:true});
 
 /* =====================================================================
-   PROJECTS -architecture toggle + subtle 3D tilt
+   GLOBAL MOUSE PARALLAX -shifts the glowing grid for subtle depth.
+   Lightweight (rAF-throttled), and fully disabled for reduced motion.
    ===================================================================== */
-document.querySelectorAll('.proj [data-arch]').forEach(btn=>{
-  btn.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    const proj = btn.closest('.proj');
-    const wasOpen = proj.classList.contains('open');
-    document.querySelectorAll('.proj').forEach(o=>o.classList.remove('open'));
-    if(!wasOpen) proj.classList.add('open');
-  });
-});
+(function(){
+  const gridGlow = document.querySelector('.grid-glow');
+  if(!gridGlow) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(window.matchMedia('(hover: none)').matches) return; // skip on touch devices
+  let mx=0,my=0,cx=0,cy=0,raf=null;
+  window.addEventListener('mousemove',(e)=>{
+    mx=(e.clientX/innerWidth-.5); my=(e.clientY/innerHeight-.5);
+    if(!raf) raf=requestAnimationFrame(loop);
+  },{passive:true});
+  function loop(){
+    cx+=(mx-cx)*.06; cy+=(my-cy)*.06;
+    gridGlow.style.setProperty('--par-x', `${-cx*26}px`);
+    gridGlow.style.setProperty('--par-y', `${-cy*26}px`);
+    if(Math.abs(mx-cx)>.001||Math.abs(my-cy)>.001){ raf=requestAnimationFrame(loop); } else { raf=null; }
+  }
+})();
 
-// Apple-style soft tilt: card leans toward the cursor, eases back on leave.
+/* =====================================================================
+   PROJECTS -data-driven cards, filters, and details modal
+   ---------------------------------------------------------------------
+   Edit PROJECT_DATA below to add / remove / hide projects or change
+   any content. No HTML edits required.
+     • featured:true  → shows the Featured badge + spans full width
+     • hidden:true    → removes the project from the grid entirely
+   ===================================================================== */
+const PROJECT_DATA = [
+  {
+    id: "autoguard",
+    title: "AutoGuard ML – AI Vehicle Recommendation System",
+    category: "AI / ML",
+    featured: true,
+    status: "Complete",
+    illustration: "ml",
+    description: "End-to-end machine learning platform that recommends vehicles using EPA vehicle data, NHTSA safety ratings, recalls, fuel economy, emissions, and ownership cost. Built with an intelligent weighted scoring engine and a modern Flask web application.",
+    tech: ["Python","Flask","Scikit-Learn","Pandas","NumPy","HTML","CSS","JavaScript","EPA Dataset","NHTSA API"],
+    features: ["Vehicle Recommendation Engine","Weighted Scoring Algorithm","Safety Analysis","Fuel Economy Analysis","Recall Integration","Machine Learning Pipeline","Responsive Web Dashboard"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "AutoGuard ML is a full machine learning platform that helps buyers find the right vehicle by combining government safety, emissions, and cost data into a single intelligent recommendation engine, served through a modern Flask web app.",
+      problem: "Car buyers must weigh safety, fuel economy, emissions, recalls, and ownership cost across thousands of vehicles, but that data lives in scattered government sources and is hard to compare objectively.",
+      solution: "A weighted scoring engine ingests EPA vehicle data, NHTSA safety ratings, recall records, fuel economy, and emissions, then ranks vehicles against each buyer's priorities and surfaces the results in a responsive dashboard.",
+      methodology: "Aggregated and cleaned multi-source government datasets, engineered comparable features, designed a configurable weighted scoring algorithm, validated recommendations against known vehicle profiles, and wrapped the pipeline in a Flask application.",
+      results: "Delivers transparent, criteria-based vehicle recommendations with integrated safety and recall context, all from a single web dashboard.",
+      challenges: "Normalizing inconsistent units and formats across EPA and NHTSA sources, and balancing competing scoring criteria so no single factor dominated the recommendation.",
+      lessons: "Reinforced the value of transparent, explainable scoring over black-box models when users need to trust and understand a recommendation."
+    }
+  },
+  {
+    id: "airbnb",
+    title: "Airbnb Investment Analytics Platform",
+    category: "Data Analytics",
+    featured: true,
+    status: "Complete",
+    illustration: "analytics",
+    description: "Analyzed over 123,000 Airbnb listings using Python, SQL, Tableau, and statistical analysis to identify the most profitable markets for real estate investment.",
+    tech: ["Python","SQL","Pandas","NumPy","Matplotlib","Tableau"],
+    features: ["Data Cleaning","Exploratory Data Analysis","Revenue Analysis","ROI Prediction","Dashboard Creation","Business Insights"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "An analytics platform that mines over 123,000 Airbnb listings to pinpoint the most profitable markets for short-term rental investment.",
+      problem: "Real estate investors lack a data-driven way to compare Airbnb markets and estimate likely returns before committing capital.",
+      solution: "A combined Python, SQL, and Tableau pipeline that cleans listing data, analyzes revenue and ROI, and visualizes the most attractive markets in interactive dashboards.",
+      methodology: "Cleaned and consolidated 123,000+ listings, ran exploratory data analysis, modeled revenue and ROI drivers with statistical analysis, and built Tableau dashboards to communicate findings.",
+      results: "Identified the highest-ROI markets and translated the analysis into clear, actionable investment insights.",
+      challenges: "Handling a large, messy dataset with missing and inconsistent fields while keeping the analysis statistically sound.",
+      lessons: "Learned how much disciplined data cleaning and clear visualization drive the credibility of an investment recommendation."
+    }
+  },
+  {
+    id: "morthan",
+    title: "Morthan Landscaping Business Dashboard",
+    category: "Database",
+    featured: true,
+    status: "Complete",
+    illustration: "database",
+    description: "Designed and developed a full-stack business dashboard with customer management, invoice tracking, scheduling, KPI reporting, and relational database architecture.",
+    tech: ["Node.js","Express.js","MySQL","SQL","HTML","CSS","JavaScript"],
+    features: ["Customer Management","Invoice Management","KPI Dashboard","Scheduling","Relational Database Design","REST APIs"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "A full-stack operations dashboard for a landscaping business, unifying customers, invoices, scheduling, and KPIs on a relational database backbone.",
+      problem: "The business tracked customers, jobs, and invoices across disconnected tools, making scheduling and performance reporting slow and error-prone.",
+      solution: "A Node.js and Express application backed by a normalized MySQL schema, exposing REST APIs for customer management, invoicing, scheduling, and KPI reporting.",
+      methodology: "Designed a relational data model, built Express REST endpoints, implemented invoice and scheduling workflows, and surfaced operational KPIs in a clean dashboard UI.",
+      results: "Centralized core business operations into one dashboard with reliable invoice tracking and at-a-glance KPI reporting.",
+      challenges: "Designing a relational schema flexible enough for evolving business rules while keeping queries efficient.",
+      lessons: "Deepened practical understanding of relational design and how a clean REST layer keeps a full-stack app maintainable."
+    }
+  },
+  {
+    id: "segmentation",
+    title: "Customer Segmentation & Subscription Prediction",
+    category: "AI / ML",
+    featured: false,
+    status: "Complete",
+    illustration: "cluster",
+    description: "Built a machine learning model that segments customers into behavioral groups and predicts subscription likelihood using e-commerce customer data.",
+    tech: ["Python","Scikit-Learn","Pandas","NumPy","Matplotlib"],
+    features: ["Data Cleaning","Feature Engineering","Customer Segmentation","Classification Models","Accuracy Evaluation","Business Recommendations"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "A machine learning project that groups e-commerce customers by behavior and predicts how likely each is to subscribe.",
+      problem: "The business treated all customers the same, missing opportunities to target the segments most likely to convert to subscriptions.",
+      solution: "An unsupervised segmentation model paired with supervised classification to score subscription likelihood and inform targeted outreach.",
+      methodology: "Cleaned customer data, engineered behavioral features, clustered customers into segments, trained classification models to predict subscription, and evaluated accuracy.",
+      results: "Produced clear customer segments and a subscription-likelihood model that drives more focused, data-backed business recommendations.",
+      challenges: "Engineering features that captured meaningful behavioral differences and choosing the right number of segments.",
+      lessons: "Saw how combining segmentation with prediction turns raw customer data into concrete marketing strategy."
+    }
+  },
+  {
+    id: "nvidia-forecast",
+    title: "NVIDIA Stock Time Series Forecasting",
+    category: "Forecasting",
+    featured: false,
+    status: "Complete",
+    illustration: "forecast",
+    description: "Developed multiple forecasting models for NVIDIA stock prices using historical market data. Compared ARIMA, SARIMA, and Prophet models to evaluate prediction accuracy and long-term trends.",
+    tech: ["Python","Pandas","NumPy","Matplotlib","ARIMA","SARIMA","Prophet"],
+    features: ["Historical Data Analysis","Time Series Modeling","Forecast Comparison","Error Metrics","Trend Visualization","Future Price Prediction"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "A time series study that forecasts NVIDIA stock prices and benchmarks several classical and modern forecasting methods against one another.",
+      problem: "Stock price movements are noisy and non-stationary, making it hard to know which forecasting approach best captures real trends.",
+      solution: "Built and compared ARIMA, SARIMA, and Prophet models on historical NVIDIA market data, evaluating each on accuracy and trend fidelity.",
+      methodology: "Collected and analyzed historical price data, tested for stationarity and seasonality, fit ARIMA, SARIMA, and Prophet models, and compared them with error metrics and trend visualizations.",
+      results: "Quantified the trade-offs between models and produced future price projections with clear error benchmarks.",
+      challenges: "Tuning model parameters for non-stationary, volatile financial data without overfitting to recent noise.",
+      lessons: "Learned how seasonality and stationarity assumptions shape which forecasting model genuinely fits a series."
+    }
+  },
+  {
+    id: "sentiment",
+    title: "Sentiment Analysis – Classical ML vs Transformers",
+    category: "AI / ML",
+    featured: false,
+    status: "Complete",
+    illustration: "nlp",
+    description: "Compared traditional machine learning algorithms with transformer-based deep learning models for sentiment classification using the IMDB movie review dataset.",
+    tech: ["Python","Scikit-Learn","Hugging Face Transformers","BERT","NLP"],
+    features: ["Data Preprocessing","Logistic Regression","Naive Bayes","BERT","Model Comparison","Accuracy Evaluation","Confusion Matrix"],
+    github: "https://github.com/shrenik355",
+    demo: "",
+    details: {
+      overview: "An NLP study that pits classical machine learning against transformer models on sentiment classification using IMDB movie reviews.",
+      problem: "Teams must decide whether the extra cost of transformer models is justified over simpler, faster classical approaches for sentiment tasks.",
+      solution: "Trained Logistic Regression and Naive Bayes baselines alongside a fine-tuned BERT model, then compared them head-to-head on the same dataset.",
+      methodology: "Preprocessed IMDB reviews, built classical baselines, fine-tuned BERT, and evaluated all models with accuracy scores and confusion matrices.",
+      results: "Produced a clear accuracy comparison showing where transformers add value and where lightweight classical models remain competitive.",
+      challenges: "Balancing the compute demands of BERT fine-tuning against the speed and simplicity of classical models for a fair comparison.",
+      lessons: "Confirmed that model choice is a trade-off: transformers can win on accuracy, but classical models often suffice at a fraction of the cost."
+    }
+  }
+];
+
+/* ---- Category-themed SVG illustrations (dark holographic HUD schematics) ---- */
+function projIllustration(type, big){
+  const h = big ? 230 : 170, vb = big ? '0 0 800 230' : '0 0 400 170';
+  const W = big?800:400, sfx = `${type}-${big?'b':'s'}`;
+  // dark holo background gradient + grid overlay + cyan→violet accent gradient
+  const bg = `<defs>
+    <linearGradient id="pg-${sfx}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B1424"/><stop offset="1" stop-color="#070C18"/></linearGradient>
+    <linearGradient id="pgb-${sfx}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+    <linearGradient id="pbar-${sfx}" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+    <pattern id="pgrid-${sfx}" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#38BDF8" stroke-opacity="0.08" stroke-width="1"/></pattern>
+  </defs>`;
+  const cx = big ? 400 : 200, cy = big ? 115 : 85;
+  const grad = `url(#pgb-${sfx})`, bar = `url(#pbar-${sfx})`;
+  let art = '';
+  if(type === 'ml' || type === 'cluster'){
+    art = `<g transform="translate(${cx} ${cy})">
+      <circle r="30" fill="none" stroke="#38BDF8" stroke-width="2.5"><animate attributeName="r" values="28;32;28" dur="4s" repeatCount="indefinite"/></circle>
+      <g stroke="#38BDF8" stroke-opacity="0.35" stroke-width="1.5">
+        <line x1="0" y1="0" x2="-110" y2="-50"/><line x1="0" y1="0" x2="110" y2="-50"/>
+        <line x1="0" y1="0" x2="-120" y2="40"/><line x1="0" y1="0" x2="120" y2="40"/><line x1="0" y1="0" x2="0" y2="65"/>
+      </g>
+      <circle cx="-110" cy="-50" r="10" fill="#A78BFA"/><circle cx="110" cy="-50" r="10" fill="#22D3EE"/>
+      <circle cx="-120" cy="40" r="10" fill="#22D3EE"/><circle cx="120" cy="40" r="10" fill="#A78BFA"/><circle cx="0" cy="65" r="10" fill="#38BDF8"/>
+      <text x="0" y="5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#05070D" font-weight="700">${type==='cluster'?'K':'ML'}</text>
+    </g>`;
+  } else if(type === 'analytics' || type === 'forecast'){
+    const ox = big ? 250 : 70, oy = big ? 175 : 130;
+    art = `<g transform="translate(${ox} ${oy})">
+      <rect x="0" y="-40" width="34" height="40" rx="4" fill="${bar}"/>
+      <rect x="50" y="-70" width="34" height="70" rx="4" fill="${bar}"/>
+      <rect x="100" y="-55" width="34" height="55" rx="4" fill="${bar}"/>
+      <rect x="150" y="-95" width="34" height="95" rx="4" fill="${bar}"/>
+      <rect x="200" y="-78" width="34" height="78" rx="4" fill="${bar}"/>
+      <polyline points="17,-50 67,-80 117,-65 167,-105 217,-88" fill="none" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"><animate attributeName="stroke-dashoffset" from="320" to="0" dur="1.6s" fill="freeze"/></polyline>
+      <g fill="#22D3EE"><circle cx="17" cy="-50" r="4"/><circle cx="67" cy="-80" r="4"/><circle cx="117" cy="-65" r="4"/><circle cx="167" cy="-105" r="4"/><circle cx="217" cy="-88" r="4"/></g>
+    </g>`;
+  } else if(type === 'database'){
+    art = `<g transform="translate(${cx} ${cy})" stroke="${grad}" stroke-width="2.5" fill="none">
+      <ellipse cx="0" cy="-42" rx="48" ry="15" fill="#0E1A30"/>
+      <path d="M-48 -42 V0 a48 15 0 0 0 96 0 V-42"/>
+      <path d="M-48 -21 a48 15 0 0 0 96 0"/>
+      <ellipse cx="0" cy="-42" rx="48" ry="15"/>
+      <g stroke="#22D3EE" stroke-width="2"><line x1="80" y1="-30" x2="130" y2="-30"/><line x1="80" y1="0" x2="130" y2="0"/><line x1="80" y1="30" x2="130" y2="30"/></g>
+      <g fill="#A78BFA" stroke="none"><circle cx="130" cy="-30" r="5"/><circle cx="130" cy="0" r="5"/><circle cx="130" cy="30" r="5"/></g>
+    </g>`;
+  } else if(type === 'nlp'){
+    art = `<g transform="translate(${cx} ${cy})">
+      <rect x="-90" y="-40" width="180" height="80" rx="14" fill="none" stroke="${grad}" stroke-width="3"/>
+      <text x="0" y="6" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="22" fill="#38BDF8" font-weight="700">"++"</text>
+      <g fill="#22D3EE"><circle cx="-70" cy="-58" r="5"/><circle cx="-30" cy="-66" r="5"/><circle cx="20" cy="-60" r="5"/><circle cx="70" cy="-58" r="5"/></g>
+      <g fill="#A78BFA"><circle cx="-50" cy="60" r="5"/><circle cx="0" cy="66" r="5"/><circle cx="55" cy="60" r="5"/></g>
+    </g>`;
+  } else {
+    art = `<g transform="translate(${cx} ${cy})"><circle r="34" fill="none" stroke="${grad}" stroke-width="3"/><circle r="10" fill="#38BDF8"/></g>`;
+  }
+  return `<svg viewBox="${vb}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project illustration">${bg}<rect width="${W}" height="${h}" fill="url(#pg-${sfx})"/><rect width="${W}" height="${h}" fill="url(#pgrid-${sfx})"/>${art}</svg>`;
+}
+
+/* ---- Render project cards ---- */
+const projGrid = document.getElementById('projGrid');
+const projFilters = document.getElementById('projFilters');
+const visibleProjects = () => PROJECT_DATA.filter(p => !p.hidden);
+
+function cardHTML(p){
+  const chips = p.tech.slice(0,5).map(t=>`<span class="chip">${t}</span>`).join('');
+  const demoBtn = p.demo ? `<a class="proj-btn" href="${p.demo}" target="_blank" rel="noopener">↗ Live Demo</a>` : '';
+  return `<div class="proj ${p.featured?'feat':''}" data-id="${p.id}" data-cat="${p.category}" data-skill="${p.tech.join(',')}">
+    <div class="glass proj-card">
+      <span class="glare" aria-hidden="true"></span>
+      <div class="proj-hero">${projIllustration(p.illustration, !!p.featured)}</div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">${p.category}</span>
+          ${p.featured?'<span class="proj-feat-badge">★ Featured</span>':''}
+        </div>
+        <div class="proj-top">
+          <h3>${p.title}</h3>
+          <span class="proj-status st-live">● ${p.status||'Complete'}</span>
+        </div>
+        <p>${p.description}</p>
+        <div class="chips">${chips}</div>
+        <div class="proj-actions">
+          <button class="proj-btn solid" data-view="${p.id}">⊕ View Details</button>
+          <a class="proj-btn" href="${p.github}" target="_blank" rel="noopener">◆ GitHub</a>
+          ${demoBtn}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderProjects(){
+  projGrid.innerHTML = visibleProjects().map(cardHTML).join('');
+  applyTilt();
+}
+
+/* ---- Filters ---- */
+function renderFilters(){
+  const cats = ['All', ...new Set(visibleProjects().map(p=>p.category))];
+  projFilters.innerHTML = cats.map((c,i)=>`<button class="filter-btn ${i===0?'active':''}" role="tab" data-filter="${c}">${c}</button>`).join('');
+  projFilters.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      projFilters.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProjects(btn.dataset.filter);
+    });
+  });
+}
+
+function filterProjects(cat){
+  projGrid.querySelectorAll('.proj').forEach((el,i)=>{
+    const match = cat==='All' || el.dataset.cat===cat;
+    el.classList.toggle('hide', !match);
+    if(match){
+      el.classList.remove('show-anim'); void el.offsetWidth;
+      el.style.animationDelay = `${i*50}ms`;
+      el.classList.add('show-anim');
+    }
+  });
+}
+
+/* ---- Soft 3D tilt + cursor glare (re-applied after each render) ---- */
 const tiltReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(!tiltReduce){
-  document.querySelectorAll('.proj').forEach(proj=>{
+function applyTilt(){
+  if(tiltReduce) return;
+  projGrid.querySelectorAll('.proj').forEach(proj=>{
     const card = proj.querySelector('.proj-card');
+    const glare = card.querySelector('.glare');
     proj.addEventListener('mousemove',(e)=>{
       const r = proj.getBoundingClientRect();
       const px = (e.clientX - r.left)/r.width - .5;
       const py = (e.clientY - r.top)/r.height - .5;
-      card.style.transform = `rotateY(${px*5}deg) rotateX(${-py*5}deg) translateY(-5px)`;
+      card.style.transform = `rotateY(${px*6.5}deg) rotateX(${-py*6.5}deg) translateY(-6px) scale(1.012)`;
+      if(glare){ glare.style.setProperty('--gx', `${(px+.5)*100}%`); glare.style.setProperty('--gy', `${(py+.5)*100}%`); }
     });
     proj.addEventListener('mouseleave',()=>{ card.style.transform=''; });
   });
 }
 
+/* ---- Project details modal ---- */
+const modal = document.getElementById('projModal');
+const modalBanner = document.getElementById('modalBanner');
+const modalBody = document.getElementById('modalBody');
+
+function openModal(id){
+  const p = PROJECT_DATA.find(x=>x.id===id);
+  if(!p) return;
+  const d = p.details || {};
+  modalBanner.innerHTML = projIllustration(p.illustration, true);
+  const techChips = p.tech.map(t=>`<span class="chip">${t}</span>`).join('');
+  const feats = (p.features||[]).map(f=>`<li>${f}</li>`).join('');
+  const section = (t,c)=> c ? `<div class="modal-section"><h4>${t}</h4>${c}</div>` : '';
+  modalBody.innerHTML = `
+    <div class="modal-head">
+      <div class="proj-meta"><span class="proj-cat">${p.category}</span>${p.featured?'<span class="proj-feat-badge">★ Featured</span>':''}</div>
+      <h3 id="modalTitle">${p.title}</h3>
+    </div>
+    ${section('Project Overview', d.overview?`<p>${d.overview}</p>`:'')}
+    ${section('Problem Statement', d.problem?`<p>${d.problem}</p>`:'')}
+    ${section('Solution', d.solution?`<p>${d.solution}</p>`:'')}
+    ${section('Methodology', d.methodology?`<p>${d.methodology}</p>`:'')}
+    ${section('Technologies Used', `<div class="chips">${techChips}</div>`)}
+    ${feats?`<div class="modal-section"><h4>Key Features</h4><ul>${feats}</ul></div>`:''}
+    <div class="modal-grid">
+      ${section('Results', d.results?`<p>${d.results}</p>`:'')}
+      ${section('Challenges', d.challenges?`<p>${d.challenges}</p>`:'')}
+    </div>
+    ${section('Lessons Learned', d.lessons?`<p>${d.lessons}</p>`:'')}
+    <div class="modal-actions">
+      <a class="proj-btn solid" href="${p.github}" target="_blank" rel="noopener">◆ GitHub Repository</a>
+      ${p.demo?`<a class="proj-btn" href="${p.demo}" target="_blank" rel="noopener">↗ Live Demo</a>`:''}
+    </div>`;
+  modal.classList.add('open');
+  document.body.classList.add('modal-locked');
+}
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.classList.remove('modal-locked');
+}
+projGrid.addEventListener('click',(e)=>{
+  const btn = e.target.closest('[data-view]');
+  if(btn) openModal(btn.dataset.view);
+});
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && modal.classList.contains('open')) closeModal(); });
+
+renderFilters();
+renderProjects();
+
 /* =====================================================================
    SKILLS -neural node graph with animated connections
+   PROJECTS is derived from PROJECT_DATA so the graph stays in sync.
    ===================================================================== */
-const SKILLS = ["Python","SQL","Machine Learning","Computer Vision","OCR","OpenCV","Random Forest","Feature Engineering","Power BI","REST APIs","Data Science","MLOps"];
-const PROJECTS = [...document.querySelectorAll('.proj')].map(p=>({
-  name: p.querySelector('h3').textContent,
-  desc: p.querySelector('p').textContent,
-  skills: (p.dataset.skill||'').split(',').map(s=>s.trim())
+const SKILLS = ["Python","SQL","Machine Learning","Flask","Scikit-Learn","Pandas","NumPy","Tableau","BERT","ARIMA","Prophet","Node.js"];
+const PROJECTS = visibleProjects().map(p=>({
+  name: p.title,
+  desc: p.description,
+  skills: p.tech
 }));
 
 const nodeField = document.getElementById('nodeField');
@@ -979,6 +1703,367 @@ let nlT; window.addEventListener('resize',()=>{ clearTimeout(nlT); nlT=setTimeou
       }
     })();
   }
+})();
+
+/* =====================================================================
+   AI ASSISTANT (A.R.I.A.) -voice + text command OS layer
+   ---------------------------------------------------------------------
+   • No backend, no audio storage, no auto-listening.
+   • Mic only starts on explicit user click.
+   • Reuses existing site functions: filterProjects(), openModal(),
+     CONFIG, and an internal scrollToSection() for navigation.
+   • Adds: conversation log w/ typewriter, welcome message, quick
+     actions, rich multi-step responses, profile answers, a command
+     guide modal, and a live system-status widget.
+   ===================================================================== */
+(function(){
+  const mic       = document.getElementById('asstMic');
+  const panel     = document.getElementById('asstPanel');
+  const closeBtn  = document.getElementById('asstClose');
+  const statusEl  = document.getElementById('asstStatus');
+  const statusTxt = document.getElementById('asstStatusText');
+  const transcript= document.getElementById('asstTranscript');
+  const input     = document.getElementById('asstInput');
+  const sendBtn   = document.getElementById('asstSend');
+  const chipsWrap = document.getElementById('asstChips');
+  const logEl     = document.getElementById('asstLog');
+  const quickEl   = document.getElementById('asstQuick');
+  const sysEl     = document.getElementById('asstSys');
+  const cmdgOverlay = document.getElementById('cmdgOverlay');
+  const cmdgBody  = document.getElementById('cmdgBody');
+  const cmdgClose = document.getElementById('cmdgClose');
+  if(!mic || !panel) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- helpers that reuse existing site behavior ---- */
+  function scrollToSection(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  // Filter by clicking the matching filter button so the active state syncs.
+  function applyFilter(cat){
+    const btns = document.querySelectorAll('#projFilters .filter-btn');
+    let hit=false;
+    btns.forEach(b=>{ if(b.dataset.filter===cat){ b.click(); hit=true; } });
+    if(!hit && typeof filterProjects==='function') filterProjects(cat);
+    scrollToSection('projects');
+  }
+  function openProjectModal(id){
+    scrollToSection('projects');
+    if(typeof openModal==='function') setTimeout(()=>openModal(id), 420);
+  }
+  function openExternal(url){ if(url) window.open(url,'_blank','noopener'); }
+
+  const C = {
+    resume:   (CONFIG && CONFIG.resumeUrl)  || 'Resume.pdf',
+    github:   (CONFIG && CONFIG.github)      || 'https://github.com/shrenik355',
+    linkedin: (CONFIG && CONFIG.linkedin)    || 'https://linkedin.com/in/shrenik-shukla'
+  };
+
+  /* =====================================================================
+     CONVERSATION LOG + TYPEWRITER
+     ===================================================================== */
+  let typingTimer=null;
+  function logUser(text){
+    const d=document.createElement('div'); d.className='asst-msg user'; d.textContent=text;
+    logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight;
+  }
+  // Type one assistant message; returns a promise resolved when done.
+  function logAI(text, opts){
+    opts=opts||{};
+    return new Promise(resolve=>{
+      const d=document.createElement('div'); d.className='asst-msg ai';
+      logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight;
+      if(reduceMotion){ d.textContent=text; logEl.scrollTop=logEl.scrollHeight; resolve(); return; }
+      const cur=document.createElement('span'); cur.className='cwait'; d.appendChild(cur);
+      let i=0; const speed=opts.speed||16;
+      (function tick(){
+        if(i<=text.length){
+          d.textContent=text.slice(0,i); d.appendChild(cur);
+          logEl.scrollTop=logEl.scrollHeight; i++;
+          typingTimer=setTimeout(tick, speed);
+        } else { cur.remove(); resolve(); }
+      })();
+    });
+  }
+  // Type a sequence of lines with small pauses between.
+  async function logSequence(lines, finalState){
+    for(const ln of lines){ await logAI(ln); await wait(reduceMotion?0:260); }
+    if(finalState) setState(finalState.state, finalState.msg);
+  }
+  function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+  /* =====================================================================
+     COMMAND REGISTRY
+     Each entry: {label, cat, desc, example, match(text), run()}
+     run() may return a Promise (for typed multi-step responses).
+     ===================================================================== */
+  const has = (t,...kw)=>kw.every(k=>t.includes(k));
+
+  // Rich, multi-step "AI response" then perform the action.
+  function respondProject(id, name, lines){
+    return (async()=>{
+      await logSequence([`Opening ${name}…`, 'Loading project…', ...lines, 'Ready.']);
+      openProjectModal(id);
+      setState('done','✓ '+name+' ready');
+    })();
+  }
+
+  const COMMANDS = [
+    // ----- Projects: specific modals first -----
+    {label:'Open AutoGuard', cat:'Projects', desc:'Open the AutoGuard ML project case study.', example:'Open AutoGuard',
+     match:t=>has(t,'autoguard')||has(t,'auto guard'),
+     run:()=>respondProject('autoguard','AutoGuard ML',['Vehicle Recommendation System','Machine Learning · EPA Dataset · NHTSA Integration'])},
+    {label:'Open Airbnb project', cat:'Projects', desc:'Open the Airbnb Investment Analytics case study.', example:'Open Airbnb project',
+     match:t=>has(t,'airbnb'),
+     run:()=>respondProject('airbnb','Airbnb Investment Analytics',['Market & ROI analysis across 123,000+ listings','Python · SQL · Tableau'])},
+    {label:'Open NVIDIA project', cat:'Projects', desc:'Open the NVIDIA stock forecasting case study.', example:'Open NVIDIA project',
+     match:t=>has(t,'nvidia'),
+     run:()=>respondProject('nvidia-forecast','NVIDIA Forecasting',['Time-series price forecasting','ARIMA · SARIMA · Prophet'])},
+    // ----- Projects: category filters -----
+    {label:'Show AI projects', cat:'Projects', desc:'Filter projects to AI / ML.', example:'Show AI projects',
+     match:t=>(has(t,'ai project')||has(t,'ai/ml')||has(t,'ml ')||has(t,'machine learning')),
+     run:()=>{ applyFilter('AI / ML'); return logSequence(['Filtering to AI / ML…','Showing machine-learning projects.'],{state:'done',msg:'✓ AI / ML projects'}); }},
+    {label:'Show database projects', cat:'Projects', desc:'Filter projects to Database.', example:'Show database projects',
+     match:t=>has(t,'database'),
+     run:()=>{ applyFilter('Database'); return logSequence(['Filtering to Database…','Showing database projects.'],{state:'done',msg:'✓ Database projects'}); }},
+    {label:'Show data projects', cat:'Projects', desc:'Filter projects to Data Analytics.', example:'Show data projects',
+     match:t=>has(t,'data') && has(t,'project') && !has(t,'database'),
+     run:()=>{ applyFilter('Data Analytics'); return logSequence(['Filtering to Data Analytics…','Showing analytics projects.'],{state:'done',msg:'✓ Data Analytics'}); }},
+    {label:'Show forecasting projects', cat:'Projects', desc:'Filter projects to Forecasting.', example:'Show forecasting projects',
+     match:t=>has(t,'forecast'),
+     run:()=>{ applyFilter('Forecasting'); return logSequence(['Filtering to Forecasting…','Showing forecasting projects.'],{state:'done',msg:'✓ Forecasting'}); }},
+    {label:'Show projects', cat:'Navigation', desc:'Scroll to the Projects section.', example:'Show projects',
+     match:t=>has(t,'project') && !/ai|ml|machine|data|database|forecast|nvidia|airbnb|autoguard/.test(t),
+     run:()=>{ scrollToSection('projects'); return logAI('Opening Projects.').then(()=>setState('done','✓ Projects')); }},
+    // ----- Profile -----
+    {label:'Who is Shrenik', cat:'Profile', desc:'A short professional summary.', example:'Who is Shrenik',
+     match:t=>has(t,'who')&&(has(t,'shrenik')||has(t,'you'))||has(t,'about shrenik')||has(t,'who is he'),
+     run:()=>logSequence([
+       'Shrenik Shukla is an AI Engineer specializing in Computer Vision, OCR, Machine Learning, and Data Analytics.',
+       "He holds a Master's in Data Science & Analytics from SUNY Buffalo State University and builds intelligent systems that combine AI, automation, and analytics to solve real-world business problems."
+     ],{state:'done',msg:'✓ Profile'})},
+    {label:'Why hire Shrenik', cat:'Profile', desc:'Why Shrenik is a strong hire.', example:'Why should I hire Shrenik',
+     match:t=>has(t,'why')&&(has(t,'hire')||has(t,'choose'))||has(t,'why shrenik'),
+     run:()=>logSequence([
+       'Shrenik pairs deep AI expertise — computer vision, ML, and OCR — with strong data engineering and analytics.',
+       'He turns ambiguous problems into production systems, owns work end-to-end, and communicates results clearly to technical and business stakeholders.',
+       'The result: measurable outcomes, not just models.'
+     ],{state:'done',msg:'✓ Summary'})},
+    {label:'Show About', cat:'Navigation', desc:'Scroll to the About section.', example:'Show about',
+     match:t=>has(t,'about')||has(t,'bio'),
+     run:()=>{ scrollToSection('about'); return logAI('Showing About.').then(()=>setState('done','✓ About')); }},
+    // ----- External links -----
+    {label:'Open resume', cat:'Profile', desc:'Open the résumé (PDF) in a new tab.', example:'Open resume',
+     match:t=>has(t,'resume')||has(t,'cv'),
+     run:()=>{ return logSequence(['Opening résumé…'],{state:'done',msg:'✓ Résumé'}).then(()=>openExternal(C.resume)); }},
+    {label:'Open GitHub', cat:'Profile', desc:'Open the GitHub profile.', example:'Open GitHub',
+     match:t=>has(t,'github'),
+     run:()=>{ return logSequence(['Opening GitHub…'],{state:'done',msg:'✓ GitHub'}).then(()=>openExternal(C.github)); }},
+    {label:'Open LinkedIn', cat:'Profile', desc:'Open the LinkedIn profile.', example:'Open LinkedIn',
+     match:t=>has(t,'linkedin'),
+     run:()=>{ return logSequence(['Opening LinkedIn…'],{state:'done',msg:'✓ LinkedIn'}).then(()=>openExternal(C.linkedin)); }},
+    // ----- Navigation -----
+    {label:'Show experience', cat:'Navigation', desc:'Scroll to the Experience timeline.', example:'Show experience',
+     match:t=>has(t,'experience')||has(t,'mission log')||has(t,'history')||has(t,'work'),
+     run:()=>{ scrollToSection('experience'); return logAI('Showing Experience.').then(()=>setState('done','✓ Experience')); }},
+    {label:'Show skills', cat:'Navigation', desc:'Scroll to the interactive skill graph.', example:'Show skills',
+     match:t=>has(t,'skill')||has(t,'capabilit'),
+     run:()=>{ scrollToSection('skills'); return logAI('Showing Skills.').then(()=>setState('done','✓ Skills')); }},
+    {label:'Contact Shrenik', cat:'Navigation', desc:'Scroll to the contact console.', example:'Contact Shrenik',
+     match:t=>has(t,'contact')||has(t,'console')||has(t,'email')||has(t,'reach'),
+     run:()=>{ scrollToSection('contact'); return logAI('Opening contact console.').then(()=>setState('done','✓ Contact')); }},
+    {label:'Go home', cat:'Navigation', desc:'Return to the top of the page.', example:'Go home',
+     match:t=>has(t,'home')||has(t,'go to top')||has(t,'hero')||has(t,'go home'),
+     run:()=>{ scrollToSection('hero'); return logAI('Returning to top.').then(()=>setState('done','✓ Home')); }},
+    // ----- Assistant -----
+    {label:'Help / Show commands', cat:'Assistant', desc:'Open the full command guide.', example:'Help',
+     match:t=>has(t,'help')||has(t,'command')||has(t,'what can you')||has(t,'guide'),
+     run:()=>{ openGuide(); return logAI('Here is everything I can do.').then(()=>setState('done','✓ Command guide')); }}
+  ];
+
+  // Voice category (documented in the guide; the mic button is the control)
+  const VOICE_GUIDE = [
+    {cmd:'Tap the mic', desc:'Start listening for a single voice command. Nothing records until you tap.', example:'(click the mic button)'},
+    {cmd:'Speak naturally', desc:'Say any command, e.g. a project or section name.', example:'Show AI projects'}
+  ];
+
+  /* =====================================================================
+     SUGGESTION CHIPS
+     ===================================================================== */
+  const SUGGESTIONS = ['Show projects','Show AI projects','Open AutoGuard','Who is Shrenik','Open resume','Show experience','Help'];
+  SUGGESTIONS.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='asst-chip'; b.type='button'; b.textContent=s;
+    b.addEventListener('click',()=>{ runCommand(s); });
+    chipsWrap.appendChild(b);
+  });
+
+  /* =====================================================================
+     LIVE SYSTEM STATUS WIDGET
+     ===================================================================== */
+  const SYS = [
+    {k:'AI Online', on:true},
+    {k:'Portfolio Loaded', on:true},
+    {k:'Projects Ready', on:true},
+    {k:'Voice Ready', on:!!(window.SpeechRecognition||window.webkitSpeechRecognition)},
+    {k:'GitHub Connected', on:true},
+    {k:'Analytics Active', on:true}
+  ];
+  SYS.forEach(s=>{
+    const d=document.createElement('div'); d.className='asst-sys-item';
+    d.innerHTML=`<i style="${s.on?'':'background:#5C7392;box-shadow:none;animation:none'}"></i>${s.k}${s.on?'':' · n/a'}`;
+    sysEl.appendChild(d);
+  });
+
+  /* =====================================================================
+     STATUS STATE MACHINE
+     ===================================================================== */
+  let doneTimer=null;
+  function setState(state, msg){
+    clearTimeout(doneTimer);
+    statusEl.dataset.state=state;
+    statusTxt.textContent=msg;
+    if(state==='done' || state==='error'){
+      doneTimer=setTimeout(()=>{ if(!listening){ statusEl.dataset.state='idle'; statusTxt.textContent='Standby — speak or type a request.'; } }, 3000);
+    }
+  }
+
+  /* =====================================================================
+     CORE: interpret + run a command string
+     ===================================================================== */
+  let busy=false;
+  function runCommand(raw){
+    const text=(raw||'').toLowerCase().trim();
+    if(!text || busy) return;
+    transcript.textContent='';
+    logUser(raw.trim());
+    setState('processing','Processing…');
+    busy=true;
+    setTimeout(async ()=>{
+      const cmd = COMMANDS.find(c=>c.match(text));
+      try{
+        if(cmd){ await Promise.resolve(cmd.run()); }
+        else {
+          await logAI("I didn't catch a known command. Try “Help” to see everything I can do.");
+          setState('error','Command not recognized');
+        }
+      }catch(_){ setState('error','Something went wrong'); }
+      busy=false;
+    }, 300);
+    input.value='';
+  }
+  // expose for chips
+  function handleCommand(raw){ runCommand(raw); }
+
+  /* =====================================================================
+     WELCOME MESSAGE (typed once per panel session)
+     ===================================================================== */
+  let welcomed=false;
+  async function welcome(){
+    if(welcomed) return; welcomed=true;
+    setState('processing','Initializing…');
+    await logAI('Welcome. I am the AI portfolio assistant for Shrenik Shukla.');
+    await wait(reduceMotion?0:200);
+    await logAI("I can guide you through Shrenik's experience, projects, technical skills, and résumé.");
+    await wait(reduceMotion?0:200);
+    await logAI('You can use voice commands or simply type a request. How may I assist you today?');
+    setState('idle','Standby — speak or type a request.');
+    // quick actions
+    quickEl.innerHTML='';
+    [['Explore Projects',()=>runCommand('Show projects')],
+     ['View Resume',()=>runCommand('Open resume')],
+     ['View Commands',()=>openGuide()]
+    ].forEach(([label,fn])=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=label;
+      b.addEventListener('click',fn); quickEl.appendChild(b);
+    });
+  }
+
+  /* =====================================================================
+     COMMAND GUIDE MODAL
+     ===================================================================== */
+  let guideBuilt=false;
+  function buildGuide(){
+    if(guideBuilt) return; guideBuilt=true;
+    const cats=['Navigation','Projects','Profile','Voice','Assistant'];
+    const byCat={}; cats.forEach(c=>byCat[c]=[]);
+    COMMANDS.forEach(c=>{ if(byCat[c.cat]) byCat[c.cat].push(c); });
+    byCat['Voice']=VOICE_GUIDE;
+    let html='';
+    cats.forEach(cat=>{
+      const items=byCat[cat]; if(!items||!items.length) return;
+      html+=`<div class="cmdg-cat"><h4>${cat}</h4>`;
+      items.forEach(it=>{
+        const cmd=it.cmd||it.label, desc=it.desc||'', eg=it.example||'';
+        html+=`<div class="cmdg-row"><div class="cmdg-cmd">${cmd}</div><div class="cmdg-desc">${desc}${eg?`<span class="cmdg-eg">${eg}</span>`:''}</div></div>`;
+      });
+      html+='</div>';
+    });
+    html+=`<div class="cmdg-priv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Voice commands run locally in your browser. No audio is stored or transmitted. Voice is optional — every command also works by typing.</span></div>`;
+    cmdgBody.innerHTML=html;
+  }
+  function openGuide(){ buildGuide(); cmdgOverlay.classList.add('open'); }
+  function closeGuide(){ cmdgOverlay.classList.remove('open'); }
+  cmdgClose.addEventListener('click', closeGuide);
+  cmdgOverlay.addEventListener('click',(e)=>{ if(e.target===cmdgOverlay) closeGuide(); });
+
+  /* =====================================================================
+     PANEL OPEN / CLOSE
+     ===================================================================== */
+  function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); mic.setAttribute('aria-expanded','true'); welcome(); }
+  function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); mic.setAttribute('aria-expanded','false'); stopListening(); }
+
+  /* =====================================================================
+     WEB SPEECH API (optional, click-to-start only)
+     ===================================================================== */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recog=null, listening=false;
+  if(SR){
+    recog=new SR();
+    recog.lang='en-US'; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
+    recog.onresult=(e)=>{
+      let txt=''; for(let i=e.resultIndex;i<e.results.length;i++) txt+=e.results[i][0].transcript;
+      transcript.textContent='“'+txt+'”';
+      if(e.results[e.results.length-1].isFinal){ runCommand(txt); }
+    };
+    recog.onerror=(e)=>{
+      listening=false; mic.classList.remove('listening');
+      if(e.error==='not-allowed'||e.error==='service-not-allowed'){ setState('error','Microphone blocked — type below.'); }
+      else if(e.error==='no-speech'){ setState('error','No speech detected. Try again or type.'); }
+      else { setState('error','Voice unavailable — type a request.'); }
+    };
+    recog.onend=()=>{ listening=false; mic.classList.remove('listening'); if(statusEl.dataset.state==='listening'){ setState('idle','Standby — speak or type a request.'); } };
+  }
+  function startListening(){
+    if(!recog){ setState('error','Voice not supported here — type a request.'); return; }
+    try{ listening=true; mic.classList.add('listening'); setState('listening','Listening… speak a command.'); recog.start(); }
+    catch(_){ }
+  }
+  function stopListening(){ if(recog && listening){ try{ recog.stop(); }catch(_){} } listening=false; mic.classList.remove('listening'); }
+
+  /* =====================================================================
+     WIRE UP EVENTS
+     ===================================================================== */
+  mic.addEventListener('click',()=>{
+    if(!panel.classList.contains('open')){ openPanel(); return; } // first click just opens + welcomes
+    if(listening){ stopListening(); setState('idle','Standby — speak or type a request.'); }
+    else { startListening(); }
+  });
+  closeBtn.addEventListener('click', closePanel);
+  sendBtn.addEventListener('click',()=>runCommand(input.value));
+  input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); runCommand(input.value); }});
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='Escape'){ if(cmdgOverlay.classList.contains('open')) closeGuide(); else if(panel.classList.contains('open')) closePanel(); }
+  });
+  // Click anywhere outside the panel (and not on the mic button) closes it.
+  document.addEventListener('pointerdown',(e)=>{
+    if(!panel.classList.contains('open')) return;
+    if(cmdgOverlay.classList.contains('open')) return; // guide handles its own outside-click
+    if(panel.contains(e.target) || mic.contains(e.target)) return;
+    closePanel();
+  });
 })();
 </script>
 </body>
