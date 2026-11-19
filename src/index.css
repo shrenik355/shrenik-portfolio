@@ -164,8 +164,7 @@ h2.title{font-family:var(--font-display);font-size:clamp(1.9rem,4.4vw,3rem);font
 .detect-corner.bl{bottom:8%;left:8%;border-bottom:2px solid var(--accent);border-left:2px solid var(--accent);border-radius:0 0 0 6px}
 .detect-corner.br{bottom:8%;right:8%;border-bottom:2px solid var(--accent);border-right:2px solid var(--accent);border-radius:0 0 6px 0}
 .detect-scanline{position:absolute;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--accent-2),transparent);box-shadow:0 0 12px 1px var(--accent-2)}
-.detect-core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.detect-core svg{width:38%;height:38%;color:var(--text-faint)}
+.detect-photo{position:absolute;inset:8%;width:84%;height:84%;object-fit:cover;border-radius:16px}
 .detect-tag{position:absolute;font-family:var(--font-mono);font-size:.72rem;color:var(--text);background:var(--card);border:1px solid var(--border);padding:6px 10px;border-radius:7px;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .detect-tag .v{color:var(--accent-2)}
 

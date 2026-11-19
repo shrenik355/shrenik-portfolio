@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import headshot from "../assets/headshot.png";
 
 const TAGS = [
   { label: "Python", score: "0.99", top: "6%", left: "2%" },
@@ -10,6 +11,7 @@ const TAGS = [
 export default function DetectionFrame() {
   return (
     <div className="detect-stage" aria-hidden="true">
+      <img className="detect-photo" src={headshot} alt="" />
       <div className="detect-frame" />
       <div className="detect-corner tl" />
       <div className="detect-corner tr" />
@@ -22,14 +24,6 @@ export default function DetectionFrame() {
         animate={{ top: ["8%", "92%", "8%"] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
-
-      <div className="detect-core">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-          <rect x="3" y="6" width="18" height="13" rx="2" />
-          <path d="M8 6V4.5a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 1 16 4.5V6" />
-          <circle cx="12" cy="12.5" r="3.2" />
-        </svg>
-      </div>
 
       {TAGS.map((tag, i) => (
         <motion.div
