@@ -1,4 +1,5 @@
 import { motion, type Variants } from "framer-motion";
+import headshot from "../assets/headshot.png";
 import { ABOUT } from "../data/content";
 
 const reveal: Variants = {
@@ -22,7 +23,7 @@ export default function About() {
 
         <div className="about-top">
           <div className="card headshot">
-            <div className="ring">{ABOUT.initials}</div>
+            <img className="headshot-photo" src={headshot} alt={ABOUT.name} width={88} height={88} loading="lazy" />
             <div className="h-name">{ABOUT.name}</div>
             <div className="h-role">{ABOUT.role}</div>
             <div className="h-loc">◉ {ABOUT.location}</div>

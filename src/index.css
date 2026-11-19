@@ -173,7 +173,7 @@ h2.title{font-family:var(--font-display);font-size:clamp(1.9rem,4.4vw,3rem);font
 .about-top{display:grid;grid-template-columns:260px 1fr;gap:24px;margin-top:40px;align-items:stretch}
 @media(max-width:860px){.about-top{grid-template-columns:1fr}}
 .headshot{padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.headshot .ring{width:88px;height:88px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:var(--accent);font-family:var(--font-display);font-size:1.7rem;font-weight:600;margin-bottom:16px}
+.headshot-photo{width:88px;height:88px;border-radius:50%;border:1px solid var(--border-strong);object-fit:cover;margin-bottom:16px}
 .headshot .h-name{font-weight:600;font-size:1.05rem;font-family:var(--font-display)}
 .headshot .h-role{color:var(--accent);font-family:var(--font-mono);font-size:.78rem;margin-top:5px}
 .headshot .h-loc{color:var(--text-faint);font-size:.78rem;margin-top:12px;display:flex;align-items:center;gap:6px}
