@@ -3,7 +3,7 @@ export const CONFIG = {
   email: "shrenik1128@gmail.com",
   linkedin: "https://linkedin.com/in/shrenik-shukla",
   github: "https://github.com/shrenik355",
-  resumeUrl: "/Resume.pdf",
+  resumeUrl: "/Shukla_Resume.pdf",
   featuredRepo: "AI-Asset-Recognition-Portfolio",
   highlightRepoKeywords: ["asset", "recognition", "vision", "ocr"],
 };
